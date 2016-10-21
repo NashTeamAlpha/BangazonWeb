@@ -1,4 +1,4 @@
-##Pull Request Description
+## Pull Request Description
 
 Include the applicable information from the list below here 
 
@@ -6,7 +6,7 @@ Include the applicable information from the list below here
 2. Explain reasons behind organizational or architectual decisions you made.
 3. Give context to what feature you were completing so the team has a mental model before looking at the code.
 
-##Steps to Test
+## Steps to Test
 
 Include the applicable information from the list below here
 
@@ -15,8 +15,7 @@ Include the applicable information from the list below here
 3. Command line utilities to run.
 4. If there is a UI component, give clear instructions for steps to perform in the UI, and what they should expect to see as the outcome of those steps.
 
-##Link to Feature Ticket
+## Link to Feature Ticket
 
-Provide a hyperlink to the ticket that contains a description of the feature you are working on here.
-
-Example of creating a hyperlink in markdown: [Google Example](https://google.com)
+Provide the issue number that this pull request fixes
+Example: #1 

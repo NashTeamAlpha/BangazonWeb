@@ -5,13 +5,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Bangazon.Models
 {
-    public class Customer
+    public class Order
     {
         [key]
         public int OrderId { get; set}
 
         [Required]
-        public bool isCompleted {get; set}
+        public bool IsCompleted {get; set}
         public int? PaymentTypeId {get; set}
         public PaymentType PaymentType {get; set}
 

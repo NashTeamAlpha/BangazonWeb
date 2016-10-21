@@ -42,11 +42,7 @@ namespace BangazonWeb.Models
 
         [Required]
         public string LastName {get;set;}
-
-        [Required]
-        public Order Order {get;set;}
-        
-        
+        public ICollection<Order> Orders;
 
     }
 }

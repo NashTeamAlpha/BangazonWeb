@@ -21,7 +21,7 @@ namespace Bangazon.Models
     [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
     public DateTime DateAdded { get; set; }
     public int ProductTypeId { get; set; }
-    public ProductType productType { get; set; }
+    public ProductType ProductType { get; set; }
     public ICollection<LineItem> LineItems; 
   }
 }

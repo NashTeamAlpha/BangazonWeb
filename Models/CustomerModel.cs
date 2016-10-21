@@ -6,7 +6,7 @@ namespace Bangazon.Models
 {
     public class Customer
     {
-        [key]
+        [Key]
 
         public int CustomerId {get;set;}
 

@@ -7,7 +7,7 @@ namespace Bangazon.Models
 {
     public class Order
     {
-        [key]
+        [Key]
         public int OrderId { get; set}
 
         [Required]

@@ -35,7 +35,7 @@ namespace BangazonWeb.Controllers
         //Arguments in Method: there are no arguments being taken in to this method
         public async Task<IActionResult> Types()
         {
-            return View(await context.ProductTypes.ToListAsync());
+            return View(await context.ProductType.ToListAsync());
         }
         //Method Name: TypesList
         //Purpose of the Method: This is called when user clicks on the specific type of products they want to view. this will return all of the products of that type to the view

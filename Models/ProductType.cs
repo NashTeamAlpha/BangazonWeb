@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Bangazon.Models
+namespace BangazonWeb.Models
 {
   public class ProductType
   {

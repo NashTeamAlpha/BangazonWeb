@@ -84,7 +84,7 @@ namespace BangazonWeb.Controllers
         //Arguments in Method: This method takes in an argument of type Product from the form 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> New(Product product)
+        public async Task<IActionResult> New([FromBody] Product product)
         {
             if (ModelState.IsValid)
             {
@@ -95,49 +95,47 @@ namespace BangazonWeb.Controllers
             //Make sure error messages are present in the view if the view is returned to the customer
             return View(product);
         }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddToCart([FromRoute] int? id)
-        {
-            var customerId = ActiveCustomer.customerId;
-            if (id == null)
-            {
-                return NotFound();
-            }
-            if (customerId == null)
-            {
-                //return the view with a message saying that there is not an active customer
-                return View();
-            }
-            //Get the active customer's order
-            var activeOrder = await context.Order.Where(o => o.IsCompleted == false && o.CustomerId==customerId).SingleOrDefaultAsync(); 
-            if (activeOrder == null)
-            {
-                var order = new Order();
-                order.IsCompleted = false;
-                order.CustomerId = Convert.ToInt32(customerId);
-                context.Add(order);
-                await context.SaveChangesAsync();
-                var newOrder = await context.Order.Where(o => o.IsCompleted == false && o.CustomerId==customerId).SingleOrDefaultAsync();
-                var lineItem = new LineItem();
-                lineItem.OrderId = newOrder.OrderId;
-                lineItem.ProductId = Convert.ToInt32(id);
-                context.Add(lineItem);
-                await context.SaveChangesAsync();
-                return RedirectToAction("Index");
-            }
-            else 
-            {
-                var lineItem = new LineItem();
-                lineItem.OrderId = activeOrder.OrderId;
-                lineItem.ProductId = Convert.ToInt32(id);
-                context.Add(lineItem);
-                await context.SaveChangesAsync();
-                return RedirectToAction("Index");
-            }
-        }
-
-
+        // [HttpPost]
+        // [ValidateAntiForgeryToken]
+        // public async Task<IActionResult> AddToCart([FromRoute] int? id)
+        // {
+        //     var customerId = ActiveCustomer.customerId;
+        //     if (id == null)
+        //     {
+        //         return NotFound();
+        //     }
+        //     if (customerId == null)
+        //     {
+        //         //return the view with a message saying that there is not an active customer
+        //         return View();
+        //     }
+        //     //Get the active customer's order
+        //     var activeOrder = await context.Order.Where(o => o.IsCompleted == false && o.CustomerId==customerId).SingleOrDefaultAsync(); 
+        //     if (activeOrder == null)
+        //     {
+        //         var order = new Order();
+        //         order.IsCompleted = false;
+        //         order.CustomerId = Convert.ToInt32(customerId);
+        //         context.Add(order);
+        //         await context.SaveChangesAsync();
+        //         var newOrder = await context.Order.Where(o => o.IsCompleted == false && o.CustomerId==customerId).SingleOrDefaultAsync();
+        //         var lineItem = new LineItem();
+        //         lineItem.OrderId = newOrder.OrderId;
+        //         lineItem.ProductId = Convert.ToInt32(id);
+        //         context.Add(lineItem);
+        //         await context.SaveChangesAsync();
+        //         return RedirectToAction("Index");
+        //     }
+        //     else 
+        //     {
+        //         var lineItem = new LineItem();
+        //         lineItem.OrderId = activeOrder.OrderId;
+        //         lineItem.ProductId = Convert.ToInt32(id);
+        //         context.Add(lineItem);
+        //         await context.SaveChangesAsync();
+        //         return RedirectToAction("Index");
+        //     }
+        // }
 
         public IActionResult Error()
         {

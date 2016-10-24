@@ -43,6 +43,17 @@ namespace BangazonWeb.Controllers
             }
             return View(customer);
         }
+        [HttpGet]
+        public IActionResult ShoppingCart()
+        {
+            //Method Name: ShoppingCart
+            //Purpose of the Method: 
+            //Gets all LineItems on active order and give data to the returned View. 
+            //Gets all PaymentTypes of selected Customer and give data to the returned View.
+            //This method returns the Customer/ShoppingCart view.
+            
+        }
+
 
     }
 }

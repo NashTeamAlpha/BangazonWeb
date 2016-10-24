@@ -8,16 +8,16 @@ namespace BangazonWeb.Models
     public class Order
     {
         [Key]
-        public int OrderId { get; set}
+        public int OrderId { get; set;}
 
         [Required]
-        public bool IsCompleted {get; set}
-        public int? PaymentTypeId {get; set}
-        public PaymentType PaymentType {get; set}
+        public bool IsCompleted {get; set;}
+        public int? PaymentTypeId {get; set;}
+        public PaymentType PaymentType {get; set;}
 
         [Required]
-        public int CustomerId {get; set}
-        public Customer Customer {get; set}
+        public int CustomerId {get; set;}
+        public Customer Customer {get; set;}
         public ICollection<LineItem> LineItems; 
 
         [Required]

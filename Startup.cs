@@ -57,7 +57,7 @@ namespace BangazonWeb
             }
             else
             {
-                app.UseExceptionHandler("/Products/Index");
+                app.UseExceptionHandler("/Products/Error");
             }
 
             app.UseStaticFiles();

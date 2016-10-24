@@ -38,7 +38,7 @@ namespace BangazonWeb
                         .AllowAnyHeader());
             });
 
-            string path = System.Environment.GetEnvironmentVariable("BangazonWeb_Db_Path");
+            string path = System.Environment.GetEnvironmentVariable("NTABangazonWeb_Db_Path");
             var connection = $"Filename={path}";
             Console.WriteLine($"connection = {connection}");
             services.AddDbContext<BangazonWebContext>(options => options.UseSqlite(connection));

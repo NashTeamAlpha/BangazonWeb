@@ -13,7 +13,7 @@ namespace BangazonWeb.Controllers
     public class CustomerController : Controller
     {
     // Class Name: Customers
-    // Author: Chris Smalley
+    // Authors: Chris Smalley, Zack Repass
     // Purpose of the class: The purpose of this class is to manage the methods that will produce the data and functionality needed for all of the views in the user interface related to customers.
     // Methods in Class: New(), ShoppingCart(), Payment(), OrderCompleted() 
         private BangazonWebContext context;
@@ -78,6 +78,9 @@ namespace BangazonWeb.Controllers
         [HttpPost]
         public async Task<IActionResult> Payment(PaymentType payment)
         {
+            //Method Name: Payment - Overloaded
+            //Purpose of the Method: This is the Overloaded method that actually adds the payments to the Db.
+            //Arguments in Method: Is the PaymentType that was just created in the previous method (Payment).
             if (ModelState.IsValid)
             {
                 context.Add(payment);
@@ -89,6 +92,9 @@ namespace BangazonWeb.Controllers
         [HttpPut]
         public async Task<IActionResult> OrderCompleted()
         {
+            //Method Name: OrderCompleted
+            //Purpose of the Method: To change the isCompleted bool from false to true and direct the user to the OrderCompleted view.
+            //Arguments in Method: None.
             var activeOrder = await context.Order.Where(o => o.IsCompleted == false && o.CustomerId==customerId)
             .SingleOrDefaultAsync(); 
             activeOrder.isCompleted = true;

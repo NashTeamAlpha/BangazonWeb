@@ -84,6 +84,17 @@ namespace BangazonWeb.Controllers
                 await context.SaveChangesAsync();
                 return RedirectToAction("ShoppingCart");
             }
+            return View();
+        }
+        [HttpPut]
+        public async Task<IActionResult> OrderCompleted()
+        {
+            var activeOrder = await context.Order.Where(o => o.IsCompleted == false && o.CustomerId==customerId)
+            .SingleOrDefaultAsync(); 
+            activeOrder.isCompleted = true;
+            context.Update(activeOrder);
+            await context.SaveChangesAsync();
+            return View();
         }
     }
 }

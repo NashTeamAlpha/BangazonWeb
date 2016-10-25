@@ -30,7 +30,7 @@ namespace BangazonWeb.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryTokenAttribute]
-        public async Task<IActionResult> Create(Customer customer)
+        public async Task<IActionResult> New(Customer customer)
         {
             //Method Name: OverloadedNew
             //Purpose of the Method: Will take an optional parameter of the type "customer." Takes form data then checks its validity. Post to customer table in database then redirects to home page.
@@ -44,16 +44,46 @@ namespace BangazonWeb.Controllers
             return View(customer);
         }
         [HttpGet]
-        public IActionResult ShoppingCart()
+        public async Task<IActionResult> ShoppingCart()
         {
             //Method Name: ShoppingCart
             //Purpose of the Method: 
             //Gets all LineItems on active order and give data to the returned View. 
             //Gets all PaymentTypes of selected Customer and give data to the returned View.
             //This method returns the Customer/ShoppingCart view.
+            var activeOrder = await context.Order.Where(o => o.IsCompleted == false && o.CustomerId==customerId).SingleOrDefaultAsync(); 
+            if (activeOrder == null)
+            {
+                var order = new Order();
+                order.IsCompleted = false;
+                order.CustomerId = Convert.ToInt32(customerId);
+                context.Add(order);
+                await context.SaveChangesAsync();
+            }
+            var lineItems = await context.LineItem.Where(li => li.OrderId == activeOrder.OrderId).ToListAsync(); 
+
+            var paymentTypes = await context.PaymentType.Where(pt => pt.CustomerId == activeCustomer.CustomerId).ToListAsync();
+                
+                return View();
             
         }
-
-
+         [HttpGet]
+         public IActionResult Payment()
+        {
+            //Method Name: Payment
+            //Purpose of the Method: Method should take you to the Payment view with form to add Payment.
+            //Arguments in Method: None
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> Payment(PaymentType payment)
+        {
+            if (ModelState.IsValid)
+            {
+                context.Add(payment);
+                await context.SaveChangesAsync();
+                return RedirectToAction("ShoppingCart");
+            }
+        }
     }
 }

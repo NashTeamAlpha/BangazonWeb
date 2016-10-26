@@ -1,0 +1,16 @@
+@model BangazonWeb.ViewModels.ProductViewModel
+
+@{
+  ViewData["Title"] = "Product Details";
+}
+<div class="row text-center"> <h1> @ViewData["Title"] </h1> </div>
+<div class="row">
+  <!--Name-->
+  <h2 class="col-sm-3"> @Html.DisplayFor(model => model.Product.Name) </h2>
+  <!--Description-->
+  <p class="col-sm-3"> @Html.DisplayFor(model => model.Product.Description) </p>
+  <!--Price-->
+  <p class="col-sm-3"> $@Html.DisplayFor(model => model.Product.Price) </p>
+  <!--Button with Add to Cart on it-->
+  <button class="btn btn-large btn-success col-sm-3" asp-action="AddToCart" asp-route-id="@Model.Product.ProductId"> Add to Cart </button>
+</div>

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BangazonWeb.Migrations
 {
-    public partial class InitialMigrations : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -28,12 +28,26 @@ namespace BangazonWeb.Migrations
                 {
                     ProductTypeId = table.Column<int>(nullable: false)
                         .Annotation("Autoincrement", true),
-                    Description = table.Column<string>(maxLength: 255, nullable: false),
                     Name = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ProductType", x => x.ProductTypeId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SubProductType",
+                columns: table => new
+                {
+                    SubProductTypeId = table.Column<int>(nullable: false)
+                        .Annotation("Autoincrement", true),
+                    Description = table.Column<string>(maxLength: 255, nullable: false),
+                    Name = table.Column<string>(nullable: false),
+                    ProductTypeId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SubProductType", x => x.SubProductTypeId);
                 });
 
             migrationBuilder.CreateTable(
@@ -177,6 +191,9 @@ namespace BangazonWeb.Migrations
         {
             migrationBuilder.DropTable(
                 name: "LineItem");
+
+            migrationBuilder.DropTable(
+                name: "SubProductType");
 
             migrationBuilder.DropTable(
                 name: "Order");

@@ -8,8 +8,8 @@ using BangazonWeb.Data;
 namespace BangazonWeb.Migrations
 {
     [DbContext(typeof(BangazonWebContext))]
-    [Migration("20161024183807_InitialMigrations")]
-    partial class InitialMigrations
+    [Migration("20161026201640_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -147,6 +147,19 @@ namespace BangazonWeb.Migrations
                     b.Property<int>("ProductTypeId")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("Name")
+                        .IsRequired();
+
+                    b.HasKey("ProductTypeId");
+
+                    b.ToTable("ProductType");
+                });
+
+            modelBuilder.Entity("BangazonWeb.Models.SubProductType", b =>
+                {
+                    b.Property<int>("SubProductTypeId")
+                        .ValueGeneratedOnAdd();
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasAnnotation("MaxLength", 255);
@@ -154,9 +167,11 @@ namespace BangazonWeb.Migrations
                     b.Property<string>("Name")
                         .IsRequired();
 
-                    b.HasKey("ProductTypeId");
+                    b.Property<int>("ProductTypeId");
 
-                    b.ToTable("ProductType");
+                    b.HasKey("SubProductTypeId");
+
+                    b.ToTable("SubProductType");
                 });
 
             modelBuilder.Entity("BangazonWeb.Models.LineItem", b =>

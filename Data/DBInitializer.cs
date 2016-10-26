@@ -43,16 +43,13 @@ namespace BangazonWeb.Data
               var productTypes = new ProductType[]
               {
                   new ProductType { 
-                      Name = "Electronics",
-                      Description = "Many electronics here"
+                      Name = "Electronics"
                   },
                   new ProductType { 
-                      Name = "La Croix",
-                      Description = "Cool La Croix taste really good"
+                      Name = "Food and Drink"
                   },
                   new ProductType { 
-                      Name = "Appliances",
-                      Description = "Many appliances, much productivity"
+                      Name = "Appliances"
                   },
               };
 
@@ -62,24 +59,48 @@ namespace BangazonWeb.Data
               }
               context.SaveChanges();
 
+              var subProductTypes = new SubProductType[]
+              {
+                  new SubProductType { 
+                      Name = "On the Go",
+                      Description = "Home electronics",
+                      ProductTypeId = productTypes.Single(s => s.Name == "Electronics").ProductTypeId
+                  },
+                  new SubProductType { 
+                      Name = "La Croix",
+                      Description = "Cool La Croix taste really good",
+                      ProductTypeId = productTypes.Single(s => s.Name == "Food and Drink").ProductTypeId
+                  },
+                  new SubProductType { 
+                      Name = "Kitchen",
+                      Description = "Appliances for your kitchen",
+                      ProductTypeId = productTypes.Single(s => s.Name == "Appliances").ProductTypeId
+                  },
+              };
+
+              foreach (SubProductType i in subProductTypes)
+              {
+                  context.SubProductType.Add(i);
+              }
+              context.SaveChanges();
 
               var products = new Product[]
               {
                   new Product { 
                       Description = "Pampelmouse La Croix which taste real good",
-                      ProductTypeId = productTypes.Single(s => s.Name == "La Croix").ProductTypeId,
+                      ProductTypeId = subProductTypes.Single(s => s.Name == "La Croix").ProductTypeId,
                       Name = "Pampelmouse La Croix",
                       Price = 3.55
                   },
                   new Product { 
                       Description = "A 2012 iPod Shuffle. Headphones are included. 16G capacity.",
-                      ProductTypeId = productTypes.Single(s => s.Name == "Electronics").ProductTypeId,
+                      ProductTypeId = subProductTypes.Single(s => s.Name == "On the Go").ProductTypeId,
                       Name = "iPod Shuffle",
                       Price = 18.00
                   },
                   new Product { 
                       Description = "Stainless steel refrigerator. Three years old. Minor scratches.",
-                      ProductTypeId = productTypes.Single(s => s.Name == "Appliances").ProductTypeId,
+                      ProductTypeId = subProductTypes.Single(s => s.Name == "Kitchen").ProductTypeId,
                       Name = "Samsung refrigerator",
                       Price = 500.00
                   }

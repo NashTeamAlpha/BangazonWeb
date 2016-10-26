@@ -19,6 +19,7 @@ namespace BangazonWeb.Data
         public DbSet<PaymentType> PaymentType { get; set; }
         public DbSet<Product> Product { get; set; }
         public DbSet<ProductType> ProductType { get; set; }
+        public DbSet<SubProductType> SubProductType { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

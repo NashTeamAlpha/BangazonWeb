@@ -8,9 +8,9 @@ namespace BangazonWeb.ViewModels
 {
   public class BaseViewModel
   {
-    public IEnumerable<SelectListItem> ListOfCustomers { get; set; }
+    public List<SelectListItem> ListOfCustomers { get; set; }
     private BangazonWebContext context;
-    private ActiveCustomer singleton = ActiveCustomer.Instance;  // Not yet implemented
+    private ActiveCustomer singleton = ActiveCustomer.Instance;
     public Customer ChosenCustomer 
     {
       get
@@ -48,7 +48,11 @@ namespace BangazonWeb.ViewModels
             .Select(li => new SelectListItem { 
                 Text = $"{li.FirstName} {li.LastName}",
                 Value = li.CustomerId.ToString()
-            });
+            }).ToList();
+        
+        this.ListOfCustomers.Insert(0, new SelectListItem {
+          Text="Choose Customer"
+        });
     }
     public BaseViewModel() { }
   }

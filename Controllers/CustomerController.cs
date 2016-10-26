@@ -43,30 +43,31 @@ namespace BangazonWeb.Controllers
             }
             return View(customer);
         }
-        [HttpGet]
-        public async Task<IActionResult> ShoppingCart()
-        {
+        //[HttpGet]
+        //public async Task<IActionResult> ShoppingCart()
+        //{
             //Method Name: ShoppingCart
             //Purpose of the Method: 
             //Gets all LineItems on active order and give data to the returned View. 
             //Gets all PaymentTypes of selected Customer and give data to the returned View.
             //This method returns the Customer/ShoppingCart view.
-            var activeOrder = await context.Order.Where(o => o.IsCompleted == false && o.CustomerId==customerId).SingleOrDefaultAsync(); 
-            if (activeOrder == null)
-            {
-                var order = new Order();
-                order.IsCompleted = false;
-                order.CustomerId = Convert.ToInt32(customerId);
-                context.Add(order);
-                await context.SaveChangesAsync();
-            }
-            var lineItems = await context.LineItem.Where(li => li.OrderId == activeOrder.OrderId).ToListAsync(); 
+            //var activeOrder = await context.Order.Where(o => o.IsCompleted == false && o.CustomerId==customerId).SingleOrDefaultAsync(); 
+            //if (activeOrder == null)
+            //{
+                //var order = new Order();
+                //order.IsCompleted = false;
+                //order.CustomerId = Convert.ToInt32(customerId);
+                //context.Add(order);
+                //await context.SaveChangesAsync();
+            //}
+            //var lineItems = await context.LineItem.Where(li => li.OrderId == activeOrder.OrderId).ToListAsync(); 
 
-            var paymentTypes = await context.PaymentType.Where(pt => pt.CustomerId == activeCustomer.CustomerId).ToListAsync();
+            //var paymentTypes = await context.PaymentType.Where(pt => pt.CustomerId == activeCustomer.CustomerId).ToListAsync();
                 
-                return View();
+                //return View();
             
-        }
+        //}
+
          [HttpGet]
          public IActionResult Payment()
         {
@@ -89,18 +90,18 @@ namespace BangazonWeb.Controllers
             }
             return View();
         }
-        [HttpPut]
-        public async Task<IActionResult> OrderCompleted()
-        {
+        //[HttpPut]
+        //public async Task<IActionResult> OrderCompleted()
+        //{
             //Method Name: OrderCompleted
             //Purpose of the Method: To change the isCompleted bool from false to true and direct the user to the OrderCompleted view.
             //Arguments in Method: None.
-            var activeOrder = await context.Order.Where(o => o.IsCompleted == false && o.CustomerId==customerId)
-            .SingleOrDefaultAsync(); 
-            activeOrder.isCompleted = true;
-            context.Update(activeOrder);
-            await context.SaveChangesAsync();
-            return View();
-        }
+            //var activeOrder = await context.Order.Where(o => o.IsCompleted == false && o.CustomerId==customerId)
+            //.SingleOrDefaultAsync(); 
+            //activeOrder.isCompleted = true;
+            //context.Update(activeOrder);
+            //await context.SaveChangesAsync();
+            //return View();
+        //}
     }
 }

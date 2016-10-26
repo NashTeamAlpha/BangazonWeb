@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BangazonWeb.Models;
 using BangazonWeb.Data;
+using BangazonWeb.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -28,7 +29,11 @@ namespace BangazonWeb.Controllers
         //Arguments in Method: there are no arguments being taken in to this method
         public async Task<IActionResult> Index()
         {
-            return View(await context.Product.ToListAsync());
+            AllProductsViewModel model = new AllProductsViewModel(context);
+
+            model.Products = await context.Product.ToListAsync();
+ 
+            return View(model);
         }
         //Method Name: Types
         //Purpose of the Method: When the customer clicks on the product types link in the navbar it activates this method. this will return the product types to the view
@@ -70,6 +75,7 @@ namespace BangazonWeb.Controllers
             {
                 return NotFound();
             }
+            
             return View(product);
         }
         //Method Name: New

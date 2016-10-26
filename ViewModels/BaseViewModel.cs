@@ -27,7 +27,6 @@ namespace BangazonWeb.ViewModels
             LastName = "Account"
           };
         }
-
         // If there is a customer chosen, return it
         return customer;
       }
@@ -57,3 +56,4 @@ namespace BangazonWeb.ViewModels
     public BaseViewModel() { }
   }
 }
+

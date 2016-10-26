@@ -9,10 +9,6 @@ namespace BangazonWeb.Models
     public int ProductTypeId {get; set;}
     [Required]
     public string Name {get; set;}
-    [Required]
-    [StringLength(255)]
-    public string Description {get; set;}
-
-    public ICollection<Product> Products; 
+    public ICollection<SubProductType> SubProductTypes; 
     }
 }

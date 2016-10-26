@@ -146,6 +146,19 @@ namespace BangazonWeb.Migrations
                     b.Property<int>("ProductTypeId")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("Name")
+                        .IsRequired();
+
+                    b.HasKey("ProductTypeId");
+
+                    b.ToTable("ProductType");
+                });
+
+            modelBuilder.Entity("BangazonWeb.Models.SubProductType", b =>
+                {
+                    b.Property<int>("SubProductTypeId")
+                        .ValueGeneratedOnAdd();
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasAnnotation("MaxLength", 255);
@@ -153,9 +166,11 @@ namespace BangazonWeb.Migrations
                     b.Property<string>("Name")
                         .IsRequired();
 
-                    b.HasKey("ProductTypeId");
+                    b.Property<int>("ProductTypeId");
 
-                    b.ToTable("ProductType");
+                    b.HasKey("SubProductTypeId");
+
+                    b.ToTable("SubProductType");
                 });
 
             modelBuilder.Entity("BangazonWeb.Models.LineItem", b =>

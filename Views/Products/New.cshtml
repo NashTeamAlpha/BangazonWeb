@@ -1,4 +1,4 @@
-@model Bangazon.ViewModels.AllProductTypesViewModel
+@model BangazonWeb.ViewModels.ProductTypesListViewModel
 
 @{
   ViewData["Title"] = "New Product";
@@ -6,7 +6,7 @@
 
 <h1> Add a New Product </h1>
 
-<form asp-action="New">
+<!--<form asp-action="New">
   <div class="form-horizontal">
     <h4> Product </h4>
     <hr />
@@ -32,27 +32,27 @@
             <span asp-validation-for="Price" class="text-danger" />
         </div>
       </div>
-      <div class="form-group">
-        <label asp-for="ProductTypeId" class="col-md-2 control-label"></label>
+      <div class="form-group">-->
+        <label asp-for="ProductTypesList" class="col-md-2 control-label"></label>
         <div class="col-md-10">
-            @Html.DropDownList("ProductTypes")
-            <span asp-validation-for="ProductTypeId" class="text-danger" />
+            @Html.DropDownList("ProductTypesList")
+            <span asp-validation-for="ProductTypesList" class="text-danger" />
         </div>
-      </div>
-      <div class="form-group">
-        <label asp-for="ProductTypeId" class="col-md-2 control-label"></label>
+      <!--</div>
+      <div class="form-group">-->
+        <label asp-for="SubProductTypesList" class="col-md-2 control-label"></label>
         <div class="col-md-10">
-            @Html.DropDownList("SubProductTypes")
-            <span asp-validation-for="ProductTypeId" class="text-danger" />
+            @Html.DropDownList("SubProductTypesList")
+            <span asp-validation-for="SubProductTypesList" class="text-danger" />
         </div>
-      </div>
+      <!--</div>
       <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type="submit" value="Add Product" class="btn btn-default" asp-action="New" />
         </div>
       </div>
     </div>
-</form>
+</form>-->
 
 <div>
     <a asp-action="Index">Back to List</a>

@@ -1,7 +1,6 @@
 {
     "version": "0.2.0",
-    "configurations": [
-        {
+    "configurations": [{
             "name": ".NET Core Launch (web)",
             "type": "coreclr",
             "request": "launch",
@@ -26,7 +25,8 @@
                 }
             },
             "env": {
-                "ASPNETCORE_ENVIRONMENT": "Development"
+                "ASPNETCORE_ENVIRONMENT": "Development",
+                "NTABangazonWeb_Db_Path": "/Users/delainewendlingschmidt/workspace/C#/bangazon/BangazonWeb/BangazonWeb.db"
             },
             "sourceFileMap": {
                 "/Views": "${workspaceRoot}/Views"

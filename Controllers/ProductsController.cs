@@ -83,7 +83,13 @@ namespace BangazonWeb.Controllers
         //Arguments in Method: No arguments are passed into this method
         public IActionResult New()
         {
-            return View();
+            ProductTypesListViewModel model = new ProductTypesListViewModel(context);
+            return View(model);
+        }
+        public IActionResult New(int id)
+        {
+            ProductTypesListViewModel model = new ProductTypesListViewModel(context, id);
+            return View(model);
         }
         //Method Name: New
         //Purpose of the Method: This method takes information from the add product form and posts that information to the database, if it is valid. If the information is invalid, the user will be returned back to the form view. 
@@ -142,6 +148,29 @@ namespace BangazonWeb.Controllers
         //         return RedirectToAction("Index");
         //     }
         // }
+
+        [HttpPost]
+        public IActionResult GetSubTypes([FromRoute]int id)
+        {
+            // ProductTypesListViewModel model = new ProductTypesListViewModel(context, id);
+            //get sub categories with that product type on them
+            // List<SelectListItem> SubProductTypesList = context.SubProductType
+            //     .Where(sub => sub.ProductTypeId == id)
+            //     .OrderBy(n => n.Name)
+            //     .AsEnumerable()
+            //     .Select(li => new SelectListItem {
+            //         Text = $"{li.Name}",
+            //         Value = li.SubProductTypeId.ToString()
+            //     }).ToList(); 
+            //     SubProductTypesList.Insert(0, new SelectListItem{
+            //         Text = "Choose Sub-Category"
+            //     });
+
+            // ViewData["SubProductTypesList"] = SubProductTypesList;
+            // string json = "{'result': 'true'}";
+            // return new ContentResult { Content = json, ContentType = "application/json" };
+            return RedirectToAction("New", "Products", new { id = id });
+        }
 
         public IActionResult Error()
         {

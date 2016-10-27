@@ -10,7 +10,7 @@ namespace BangazonWeb.ViewModels
     //Author: Debbie Bourne
     //Purpose of the class: The purpose of this class is to manage the methods that will produce the data and functionality needed for all of the views in the user interface related to products.
     //Methods in Class: AllProductTypesViewModel() 
-        public IEnumerable<ProductType> ProductType { get; set; }
+        public IEnumerable<ProductType> ProductTypes { get; set; }
         public AllProductTypesViewModel(BangazonWebContext ctx) : base(ctx) { } 
         //Method Name: Index
         //Purpose of the Method: This method will return a list of all of the product types to the productsTypes view

@@ -90,11 +90,6 @@ namespace BangazonWeb.Data
                       ProductTypeId = productTypes.Single(s => s.Name == "Appliances").ProductTypeId
                   },
                   new SubProductType { 
-                      Name = "Microwaves",
-                      Description = "Appliances to quickly heat food",
-                      ProductTypeId = productTypes.Single(s => s.Name == "Appliances").ProductTypeId
-                  },
-                  new SubProductType { 
                       Name = "Portable Audio and Accessories",
                       Description = "MP3 players, headphones, wearable Accessories, portable bluetooth audio",
                       ProductTypeId = productTypes.Single(s => s.Name == "Electronics and Media").ProductTypeId

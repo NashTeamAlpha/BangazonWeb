@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BangazonWeb.Models;
 using BangazonWeb.Data;
+using BangazonWeb.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -21,12 +22,15 @@ namespace BangazonWeb.Controllers
         {
             context = ctx;
         }
+        private ActiveCustomer singleton = ActiveCustomer.Instance;
         public IActionResult New()
         {
             //Method Name: New
             //Purpose of the Method: Loads new customer form to the view, view wil be static.
             //Arguments in Method: Need more clarification here
-            return View();
+
+            BaseViewModel model = new BaseViewModel(context);
+            return View(model);
         }
         [HttpPost]
         [ValidateAntiForgeryTokenAttribute]
@@ -41,32 +45,32 @@ namespace BangazonWeb.Controllers
                 await context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            return View(customer);
+            return BadRequest();
         }
-        //[HttpGet]
-        //public async Task<IActionResult> ShoppingCart()
-        //{
+        [HttpGet]
             //Method Name: ShoppingCart
             //Purpose of the Method: 
             //Gets all LineItems on active order and give data to the returned View. 
             //Gets all PaymentTypes of selected Customer and give data to the returned View.
             //This method returns the Customer/ShoppingCart view.
-            //var activeOrder = await context.Order.Where(o => o.IsCompleted == false && o.CustomerId==customerId).SingleOrDefaultAsync(); 
-            //if (activeOrder == null)
-            //{
-                //var order = new Order();
-                //order.IsCompleted = false;
-                //order.CustomerId = Convert.ToInt32(customerId);
-                //context.Add(order);
-                //await context.SaveChangesAsync();
-            //}
-            //var lineItems = await context.LineItem.Where(li => li.OrderId == activeOrder.OrderId).ToListAsync(); 
+        public async Task<IActionResult> ShoppingCart()
+        {
+            var activeOrder = await context.Order.Where(o => o.IsCompleted == false && o.CustomerId==singleton.Customer.CustomerId).SingleOrDefaultAsync(); 
+            if (activeOrder == null)
+            {
+                var order = new Order();
+                order.IsCompleted = false;
+                order.CustomerId = Convert.ToInt32(singleton.Customer.CustomerId);
+                context.Add(order);
+                await context.SaveChangesAsync();
+            }
+            ShoppingCartViewModel model = new ShoppingCartViewModel(context);
 
-            //var paymentTypes = await context.PaymentType.Where(pt => pt.CustomerId == activeCustomer.CustomerId).ToListAsync();
-                
-                //return View();
+            model.LineItems = activeOrder.LineItems;
+
+            return View(model);
             
-        //}
+        }
 
          [HttpGet]
          public IActionResult Payment()
@@ -74,8 +78,12 @@ namespace BangazonWeb.Controllers
             //Method Name: Payment
             //Purpose of the Method: Method should take you to the Payment view with form to add Payment.
             //Arguments in Method: None
-            return View();
+
+            BaseViewModel model = new BaseViewModel(context);
+
+            return View(model);
         }
+
         [HttpPost]
         public async Task<IActionResult> Payment(PaymentType payment)
         {
@@ -88,21 +96,26 @@ namespace BangazonWeb.Controllers
                 await context.SaveChangesAsync();
                 return RedirectToAction("ShoppingCart");
             }
-            return View();
+            return BadRequest();
         }
-        //[HttpPut]
-        //public async Task<IActionResult> OrderCompleted()
-        //{
-            //Method Name: OrderCompleted
-            //Purpose of the Method: To change the isCompleted bool from false to true and direct the user to the OrderCompleted view.
-            //Arguments in Method: None.
-            //var activeOrder = await context.Order.Where(o => o.IsCompleted == false && o.CustomerId==customerId)
-            //.SingleOrDefaultAsync(); 
-            //activeOrder.isCompleted = true;
-            //context.Update(activeOrder);
-            //await context.SaveChangesAsync();
-            //return View();
-        //}
+
+        //Method Name: OrderCompleted
+        //Purpose of the Method: To change the isCompleted bool from false to true and direct the user to the OrderCompleted view.
+        //Arguments in Method: None.
+
+        [HttpPut]
+        public async Task<IActionResult> OrderCompleted()
+        {
+            var activeOrder = await context.Order.Where(o => o.IsCompleted == false && o.CustomerId==singleton.Customer.CustomerId)
+            .SingleOrDefaultAsync(); 
+            activeOrder.IsCompleted = true;
+            context.Update(activeOrder);
+            await context.SaveChangesAsync();
+
+            BaseViewModel model = new BaseViewModel(context);
+
+            return View(model);
+        }
         [HttpPost]
         public IActionResult Activate([FromRoute]int id)
         {

@@ -80,7 +80,7 @@ namespace BangazonWeb.Data
                       ProductTypeId = productTypes.Single(s => s.Name == "Appliances").ProductTypeId
                   },
                   new SubProductType { 
-                      Name = "Small Applicances",
+                      Name = "Small Appliances",
                       Description = "A varity of small household appliances from coffee makers to irons to desk fans",
                       ProductTypeId = productTypes.Single(s => s.Name == "Appliances").ProductTypeId
                   },
@@ -101,7 +101,7 @@ namespace BangazonWeb.Data
                   },
                   new SubProductType { 
                       Name = "Computers, Hardware, Software, and Components",
-                      Description = "Everything related to the computers from printers, modems, Operating Systems, Microsoft Office, etc.",
+                      Description = "Everything related to computers from printers, modems, Operating Systems, Microsoft Office, etc.",
                       ProductTypeId = productTypes.Single(s => s.Name == "Electronics and Media").ProductTypeId
                   },
                   new SubProductType { 

@@ -19,6 +19,7 @@ namespace BangazonWeb.Controllers
     {
         
         private BangazonWebContext context;
+        private ActiveCustomer singleton = ActiveCustomer.Instance;
         public ProductsController (BangazonWebContext ctx)
         {
             context = ctx;
@@ -40,7 +41,11 @@ namespace BangazonWeb.Controllers
         //Arguments in Method: there are no arguments being taken in to this method
         public async Task<IActionResult> Types()
         {
-            return View(await context.ProductType.ToListAsync());
+            AllProductTypesViewModel model = new AllProductTypesViewModel(context);
+           
+            model.ProductTypes = await context.ProductType.ToListAsync();
+
+            return View(model);
         }
         //Method Name: TypesList
         //Purpose of the Method: This is called when user clicks on the specific type of products they want to view. this will return all of the products of that type to the view
@@ -52,15 +57,17 @@ namespace BangazonWeb.Controllers
                 return NotFound();
             }
             
-            var ProductsInType = await context.Product.Where(p => p.ProductTypeId == id).ToListAsync();
-            //var ProductsInType = await context.Product.ToListAsync(p => p.ProductTypeId == id);    weren't sure if this would work
-            
-            if (ProductsInType == null)
+            AllProductsViewModel model = new AllProductsViewModel(context);
+
+            model.Products =  await context.Product.Where(p => p.ProductTypeId == id).ToListAsync();
+
+            if (model.Products == null)
             {
                 return NotFound();
             }
-            return View(ProductsInType);
+            return View(model);
         }
+
         //Method Name: Single
         //Purpose of the Method: This method is called when a user clicks on an inidividual product and gets the data from the database about that product to be returned to the view
         //Arguments in Method: Takes an integer from the route that matched the product selected's product id
@@ -70,20 +77,26 @@ namespace BangazonWeb.Controllers
             {
                 return NotFound();
             }
-            var product = await context.Product.SingleOrDefaultAsync(p => p.ProductId == id);
-            if (product == null)
+            
+            SingleProductViewModel model = new SingleProductViewModel(context);
+
+            model.Product = await context.Product.SingleOrDefaultAsync(p => p.ProductId == id);
+
+            if (model.Product == null)
             {
                 return NotFound();
             }
             
-            return View(product);
+            return View(model);
         }
         //Method Name: New
         //Purpose of the Method: This method returns the New.cshtml file in the Products folder, which will contain a form to add a new product
         //Arguments in Method: No arguments are passed into this method
         public IActionResult New()
         {
-            return View();
+            BaseViewModel model = new BaseViewModel(context);
+
+            return View(model);
         }
         //Method Name: New
         //Purpose of the Method: This method takes information from the add product form and posts that information to the database, if it is valid. If the information is invalid, the user will be returned back to the form view. 
@@ -99,49 +112,40 @@ namespace BangazonWeb.Controllers
                 return RedirectToAction("Index");
             }
             //Make sure error messages are present in the view if the view is returned to the customer
-            return View(product);
+            return NotFound();
         }
-        // [HttpPost]
-        // [ValidateAntiForgeryToken]
-        // public async Task<IActionResult> AddToCart([FromRoute] int? id)
-        // {
-        //     var customerId = ActiveCustomer.customerId;
-        //     if (id == null)
-        //     {
-        //         return NotFound();
-        //     }
-        //     if (customerId == null)
-        //     {
-        //         //return the view with a message saying that there is not an active customer
-        //         return View();
-        //     }
-        //     //Get the active customer's order
-        //     var activeOrder = await context.Order.Where(o => o.IsCompleted == false && o.CustomerId==customerId).SingleOrDefaultAsync(); 
-        //     if (activeOrder == null)
-        //     {
-        //         var order = new Order();
-        //         order.IsCompleted = false;
-        //         order.CustomerId = Convert.ToInt32(customerId);
-        //         context.Add(order);
-        //         await context.SaveChangesAsync();
-        //         var newOrder = await context.Order.Where(o => o.IsCompleted == false && o.CustomerId==customerId).SingleOrDefaultAsync();
-        //         var lineItem = new LineItem();
-        //         lineItem.OrderId = newOrder.OrderId;
-        //         lineItem.ProductId = Convert.ToInt32(id);
-        //         context.Add(lineItem);
-        //         await context.SaveChangesAsync();
-        //         return RedirectToAction("Index");
-        //     }
-        //     else 
-        //     {
-        //         var lineItem = new LineItem();
-        //         lineItem.OrderId = activeOrder.OrderId;
-        //         lineItem.ProductId = Convert.ToInt32(id);
-        //         context.Add(lineItem);
-        //         await context.SaveChangesAsync();
-        //         return RedirectToAction("Index");
-        //     }
-        // }
+         [HttpPost]
+         [ValidateAntiForgeryToken]
+         public async Task<IActionResult> AddToCart([FromRoute] int? id)
+         {
+             //Get the active customer's order
+             var activeOrder = await context.Order.Where(o => o.IsCompleted == false && o.CustomerId==singleton.Customer.CustomerId).SingleOrDefaultAsync(); 
+
+             if (activeOrder == null)
+             {
+                 var order = new Order();
+                 order.IsCompleted = false;
+                 order.CustomerId = Convert.ToInt32(singleton.Customer.CustomerId);
+                 context.Add(order);
+                 await context.SaveChangesAsync();
+                 var newOrder = await context.Order.Where(o => o.IsCompleted == false && o.CustomerId==singleton.Customer.CustomerId).SingleOrDefaultAsync();
+                 var lineItem = new LineItem();
+                 lineItem.OrderId = newOrder.OrderId;
+                 lineItem.ProductId = Convert.ToInt32(id);
+                 context.Add(lineItem);
+                 await context.SaveChangesAsync();
+                 return RedirectToAction("Index");
+             }
+             else 
+            {
+                 var lineItem = new LineItem();
+                 lineItem.OrderId = activeOrder.OrderId;
+                 lineItem.ProductId = Convert.ToInt32(id);
+                 context.Add(lineItem);
+                 await context.SaveChangesAsync();
+                 return RedirectToAction("Index");
+             }
+         }
 
         public IActionResult Error()
         {

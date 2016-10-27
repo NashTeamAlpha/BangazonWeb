@@ -1,8 +1,6 @@
 using System.Linq;
 using BangazonWeb.Data;
 using BangazonWeb.Models;
-using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace BangazonWeb.ViewModels
 {   //Class Name: SingleProductViewModel

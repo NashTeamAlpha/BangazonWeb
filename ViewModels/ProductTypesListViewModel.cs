@@ -30,36 +30,33 @@ namespace BangazonWeb.ViewModels
         this.SubProductTypesList.Insert(0, new SelectListItem{
           Text = "Choose Sub-Category"
         });
-        // this.SubProductTypesList.Insert(1, new SelectListItem{
-        //   Text = "Choose a Product Category to get Sub Categories"
-        // });
     }
 
-    public ProductTypesListViewModel(BangazonWebContext ctx, int id) : base(ctx)
-    { 
-        context = ctx;
-        this.ProductTypesList = context.ProductType
-          .OrderBy(type => type.Name)
-          .AsEnumerable()
-          .Select(li => new SelectListItem{
-            Text = $"{li.Name}",
-            Value = li.ProductTypeId.ToString()
-          }).ToList();
-        this.ProductTypesList.Insert(0, new SelectListItem{
-          Text = "Choose Product Category"
-        });
+    // public ProductTypesListViewModel(BangazonWebContext ctx, int id) : base(ctx)
+    // { 
+    //     context = ctx;
+    //     this.ProductTypesList = context.ProductType
+    //       .OrderBy(type => type.Name)
+    //       .AsEnumerable()
+    //       .Select(li => new SelectListItem{
+    //         Text = $"{li.Name}",
+    //         Value = li.ProductTypeId.ToString()
+    //       }).ToList();
+    //     this.ProductTypesList.Insert(0, new SelectListItem{
+    //       Text = "Choose Product Category"
+    //     });
 
-        this.SubProductTypesList = context.SubProductType
-            .Where(sub => sub.ProductTypeId == id)
-            .OrderBy(n => n.Name)
-            .AsEnumerable()
-            .Select(li => new SelectListItem {
-                Text = $"{li.Name}",
-                Value = li.SubProductTypeId.ToString()
-            }).ToList();
-        this.ProductTypesList.Insert(0, new SelectListItem{
-          Text = "Choose Sub-Category"
-        });
-    }
+    //     this.SubProductTypesList = context.SubProductType
+    //         .Where(sub => sub.ProductTypeId == id)
+    //         .OrderBy(n => n.Name)
+    //         .AsEnumerable()
+    //         .Select(li => new SelectListItem {
+    //             Text = $"{li.Name}",
+    //             Value = li.SubProductTypeId.ToString()
+    //         }).ToList();
+    //     this.SubProductTypesList.Insert(0, new SelectListItem{
+    //       Text = "Choose Sub-Category"
+    //     });
+    // }
   }
 }

@@ -1,9 +1,8 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using BangazonWeb.Models;
 using BangazonWeb.Data;
+using BangazonWeb.Models;
 using BangazonWeb.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -81,32 +80,30 @@ namespace BangazonWeb.Controllers
         //Method Name: New
         //Purpose of the Method: This method returns the New.cshtml file in the Products folder, which will contain a form to add a new product
         //Arguments in Method: No arguments are passed into this method
+        [HttpGet]
         public IActionResult New()
         {
             ProductTypesListViewModel model = new ProductTypesListViewModel(context);
+            // model.Product = context.Product
             return View(model);
         }
-        public IActionResult New(int id)
-        {
-            ProductTypesListViewModel model = new ProductTypesListViewModel(context, id);
-            return View(model);
-        }
-        //Method Name: New
-        //Purpose of the Method: This method takes information from the add product form and posts that information to the database, if it is valid. If the information is invalid, the user will be returned back to the form view. 
-        //Arguments in Method: This method takes in an argument of type Product from the form 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> New([FromBody] Product product)
-        {
-            if (ModelState.IsValid)
-            {
-                context.Add(product);
-                await context.SaveChangesAsync();
-                return RedirectToAction("Index");
-            }
-            //Make sure error messages are present in the view if the view is returned to the customer
-            return View(product);
-        }
+
+        // //Method Name: New
+        // //Purpose of the Method: This method takes information from the add product form and posts that information to the database, if it is valid. If the information is invalid, the user will be returned back to the form view. 
+        // //Arguments in Method: This method takes in an argument of type Product from the form 
+        // [HttpPost]
+        // [ValidateAntiForgeryToken]
+        // public async Task<IActionResult> New([FromBody] Product product)
+        // {
+        //     if (ModelState.IsValid)
+        //     {
+        //         context.Add(product);
+        //         await context.SaveChangesAsync();
+        //         return RedirectToAction("Index");
+        //     }
+        //     //Make sure error messages are present in the view if the view is returned to the customer
+        //     return View(product);
+        // }
         // [HttpPost]
         // [ValidateAntiForgeryToken]
         // public async Task<IActionResult> AddToCart([FromRoute] int? id)
@@ -149,27 +146,17 @@ namespace BangazonWeb.Controllers
         //     }
         // }
 
+        //Method Name: GetSubTypes
+        //Purpose of the Method: This method is called when the user changes the Product Type dropdown list to select a larger product category. The method grabs all subTypes within that Product Type and returns them in a Json format. 
+        //Arguments in Method: Takes in an integer, which is equal to the ProductTypeId of the selected larger Product Category. 
         [HttpPost]
         public IActionResult GetSubTypes([FromRoute]int id)
         {
-            // ProductTypesListViewModel model = new ProductTypesListViewModel(context, id);
             //get sub categories with that product type on them
-            // List<SelectListItem> SubProductTypesList = context.SubProductType
-            //     .Where(sub => sub.ProductTypeId == id)
-            //     .OrderBy(n => n.Name)
-            //     .AsEnumerable()
-            //     .Select(li => new SelectListItem {
-            //         Text = $"{li.Name}",
-            //         Value = li.SubProductTypeId.ToString()
-            //     }).ToList(); 
-            //     SubProductTypesList.Insert(0, new SelectListItem{
-            //         Text = "Choose Sub-Category"
-            //     });
-
-            // ViewData["SubProductTypesList"] = SubProductTypesList;
-            // string json = "{'result': 'true'}";
-            // return new ContentResult { Content = json, ContentType = "application/json" };
-            return RedirectToAction("New", "Products", new { id = id });
+            var subTypes = context.SubProductType.Where(p => p.ProductTypeId == id).ToList();
+            // ProductTypesListViewModel model = new ProductTypesListViewModel(context, id);
+            // return View("~/Views/Products/New.cshtml", model);
+            return Json(subTypes);
         }
 
         public IActionResult Error()

@@ -19,11 +19,11 @@ $(document).ready(function() {
             contentType: 'application/json; charset=utf-8'
         }).done((subTypes) => {
             console.log("info", subTypes);
-            $("#SubProductTypesList").html("");
-            $("#SubProductTypesList").append("<option> Select a Sub Category </option>");
+            $("#Product_SubProductTypeId").html("");
+            $("#Product_SubProductTypeId").append("<option> Choose a Sub Category </option>");
             subTypes.forEach((option) => {
                 console.log(option);
-                $("#SubProductTypesList").append(`<option value="${option.subProductTypeId}">${option.name}</option>`)
+                $("#Product_SubProductTypeId").append(`<option value="${option.subProductTypeId}">${option.name}</option>`)
             });
             // location.reload();
         });

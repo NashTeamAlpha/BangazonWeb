@@ -16,7 +16,6 @@
         <div class="col-md-10">
           <input asp-for="Product.Name" class="form-control" type="text" />
           <span asp-validation-for="Product.Name" class="text-danger" />
-          @Html.ValidationMessage("Product.Name")
         </div>
       </div>
       <div class="form-group">
@@ -24,15 +23,13 @@
         <div class="col-md-10">
             <input asp-for="Product.Description" class="form-control" type="text" />
             <span asp-validation-for="Product.Description" class="text-danger" />
-            @Html.ValidationMessage("Product.Description")
         </div>
       </div>
       <div class="form-group">
         <label asp-for="Product.Price" class="col-md-2 control-label"></label>
         <div class="col-md-10">
-            <input asp-for="Product.Price" class="form-control" type="number" />
+            <input asp-for="Product.Price" class="form-control" />
             <span asp-validation-for="Product.Price" class="text-danger" />
-            @Html.ValidationMessage("Product.Price")
         </div>
       </div>
       <div class="form-group">
@@ -45,7 +42,9 @@
       <div class="form-group">
         <label asp-for="SubProductTypesList" class="col-md-2 control-label"></label>
         <div class="col-md-10">
-            @Html.DropDownList("SubProductTypesList")
+            <select asp-for="Product.SubProductTypeId" 
+                    asp-items="Model.SubProductTypesList">
+            </select>
             <span asp-validation-for="Product.SubProductTypeId" class="text-danger" />
         </div>
       </div>

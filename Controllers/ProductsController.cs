@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -102,7 +103,7 @@ namespace BangazonWeb.Controllers
         // //Arguments in Method: This method takes in an argument of type Product from the form 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> New([FromBody] Product product)
+        public async Task<IActionResult> New(Product product)
         {
             if (ModelState.IsValid)
             {
@@ -139,7 +140,7 @@ namespace BangazonWeb.Controllers
             {
                  var lineItem = new LineItem();
                  lineItem.OrderId = activeOrder.OrderId;
-                 lineItem.ProductId = id;
+                 lineItem.ProductId = Convert.ToInt32(id);
                  context.Add(lineItem);
                  await context.SaveChangesAsync();
                  return RedirectToAction("Index");

@@ -46,10 +46,18 @@
         }
     },
 
+<<<<<<< HEAD
     "buildOptions": {
         "emitEntryPoint": true,
         "preserveCompilationContext": true
     },
+=======
+  "buildOptions": {
+    "emitEntryPoint": true,
+    "preserveCompilationContext": true,
+    "debugType": "portable"
+  },
+>>>>>>> master
 
     "runtimeOptions": {
         "configProperties": {

@@ -154,8 +154,6 @@ namespace BangazonWeb.Controllers
         {
             //get sub categories with that product type on them
             var subTypes = context.SubProductType.Where(p => p.ProductTypeId == id).ToList();
-            // ProductTypesListViewModel model = new ProductTypesListViewModel(context, id);
-            // return View("~/Views/Products/New.cshtml", model);
             return Json(subTypes);
         }
 

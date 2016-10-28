@@ -28,6 +28,7 @@ namespace BangazonWeb.Controllers
         //Method Name: New
         //Purpose of the Method: Loads new customer form to the view, view wil be static.
         //Arguments in Method: None.
+        [HttpGet]
         public IActionResult New()
         {
 

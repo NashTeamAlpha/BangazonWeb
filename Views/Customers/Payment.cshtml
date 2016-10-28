@@ -1,0 +1,82 @@
+@model BangazonWeb.Models.PaymentType
+
+@{
+    ViewData["Title"] = "New Payment Type";
+}
+
+<h1>Add a New Payment Type</h1>
+
+<form asp-action="Payment">
+    <div class="form-horizontal">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>    
+        <div class="form-group">
+            <label asp-for="First Name" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="FirstName" class="form-control" />
+                <span asp-validation-for="FirstName" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Last Name" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="LastName" class="form-control" />
+                <span asp-validation-for="LastName" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Street Address" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="StreetAddress" class="form-control" />
+                <span asp-validation-for="StreetAddress" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="State" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="State" class="form-control" />
+                <span asp-validation-for="State" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="City" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="City" class="form-control" />
+                <span asp-validation-for="City" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="ZIP" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="ZIP" class="form-control" />
+                <span asp-validation-for="ZIP" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Type of Credit Card" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Processor" class="form-control" />
+                <span asp-validation-for="Processor" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Card Number" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="CardNumber" class="form-control" />
+                <span asp-validation-for="CardNumber" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Expiration Date" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="ExpirationDate" class="form-control" />
+                <span asp-validation-for="ExpirationDate" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" asp-action="Payment" value="Create Payment Type" class="btn btn-default" />
+            </div>
+        </div>
+
+    </div>
+</form>

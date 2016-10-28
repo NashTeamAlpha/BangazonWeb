@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using BangazonWeb.Models;
 using BangazonWeb.Data;
+using BangazonWeb.Models;
 using BangazonWeb.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -57,15 +57,14 @@ namespace BangazonWeb.Controllers
                 return NotFound();
             }
             
-            AllProductsViewModel model = new AllProductsViewModel(context);
-
-            model.Products =  await context.Product.Where(p => p.ProductTypeId == id).ToListAsync();
-
-            if (model.Products == null)
+            var ProductsInSubType = await context.Product.Where(p => p.SubProductTypeId == id).ToListAsync();
+            //var ProductsInType = await context.Product.ToListAsync(p => p.ProductTypeId == id);    weren't sure if this would work
+            
+            if (ProductsInSubType == null)
             {
                 return NotFound();
             }
-            return View(model);
+            return View(ProductsInSubType);
         }
 
         //Method Name: Single
@@ -92,15 +91,16 @@ namespace BangazonWeb.Controllers
         //Method Name: New
         //Purpose of the Method: This method returns the New.cshtml file in the Products folder, which will contain a form to add a new product
         //Arguments in Method: No arguments are passed into this method
+        [HttpGet]
         public IActionResult New()
         {
-            BaseViewModel model = new BaseViewModel(context);
-
+            ProductTypesListViewModel model = new ProductTypesListViewModel(context);
             return View(model);
         }
-        //Method Name: New
-        //Purpose of the Method: This method takes information from the add product form and posts that information to the database, if it is valid. If the information is invalid, the user will be returned back to the form view. 
-        //Arguments in Method: This method takes in an argument of type Product from the form 
+
+        // //Method Name: New
+        // //Purpose of the Method: This method takes information from the add product form and posts that information to the database, if it is valid. If the information is invalid, the user will be returned back to the form view. 
+        // //Arguments in Method: This method takes in an argument of type Product from the form 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> New([FromBody] Product product)
@@ -125,7 +125,7 @@ namespace BangazonWeb.Controllers
              {
                  var order = new Order();
                  order.IsCompleted = false;
-                 order.CustomerId = Convert.ToInt32(singleton.Customer.CustomerId);
+                 order.CustomerId = singleton.Customer.CustomerId;
                  context.Add(order);
                  await context.SaveChangesAsync();
                  var newOrder = await context.Order.Where(o => o.IsCompleted == false && o.CustomerId==singleton.Customer.CustomerId).SingleOrDefaultAsync();
@@ -146,6 +146,17 @@ namespace BangazonWeb.Controllers
                  return RedirectToAction("Index");
              }
          }
+
+        //Method Name: GetSubTypes
+        //Purpose of the Method: This method is called when the user changes the Product Type dropdown list to select a larger product category. The method grabs all subTypes within that Product Type and returns them in a Json format. 
+        //Arguments in Method: Takes in an integer, which is equal to the ProductTypeId of the selected larger Product Category. 
+        [HttpPost]
+        public IActionResult GetSubTypes([FromRoute]int id)
+        {
+            //get sub categories with that product type on them
+            var subTypes = context.SubProductType.Where(p => p.ProductTypeId == id).ToList();
+            return Json(subTypes);
+        }
 
         public IActionResult Error()
         {

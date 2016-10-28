@@ -161,19 +161,19 @@ namespace BangazonWeb.Data
               {
                   new Product { 
                       Description = "Pampelmouse La Croix which taste real good",
-                      ProductTypeId = subProductTypes.Single(s => s.Name == "Food").ProductTypeId,
+                      SubProductTypeId = subProductTypes.Single(s => s.Name == "La Croix").SubProductTypeId,
                       Name = "Pampelmouse La Croix",
                       Price = 3.55
                   },
                   new Product { 
                       Description = "A 2012 iPod Shuffle. Headphones are included. 16G capacity.",
-                      ProductTypeId = subProductTypes.Single(s => s.Name == "Portable Audio and Accessories").ProductTypeId,
+                      SubProductTypeId = subProductTypes.Single(s => s.Name == "On the Go").SubProductTypeId,
                       Name = "iPod Shuffle",
                       Price = 18.00
                   },
                   new Product { 
                       Description = "Stainless steel refrigerator. Three years old. Minor scratches.",
-                      ProductTypeId = subProductTypes.Single(s => s.Name == "Refrigerators and Freezers").ProductTypeId,
+                      SubProductTypeId = subProductTypes.Single(s => s.Name == "Kitchen").SubProductTypeId,
                       Name = "Samsung refrigerator",
                       Price = 500.00
                   }

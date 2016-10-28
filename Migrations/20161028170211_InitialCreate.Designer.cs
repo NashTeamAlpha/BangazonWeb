@@ -8,7 +8,7 @@ using BangazonWeb.Data;
 namespace BangazonWeb.Migrations
 {
     [DbContext(typeof(BangazonWebContext))]
-    [Migration("20161026201640_InitialCreate")]
+    [Migration("20161028170211_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -133,11 +133,11 @@ namespace BangazonWeb.Migrations
 
                     b.Property<double>("Price");
 
-                    b.Property<int>("ProductTypeId");
+                    b.Property<int>("SubProductTypeId");
 
                     b.HasKey("ProductId");
 
-                    b.HasIndex("ProductTypeId");
+                    b.HasIndex("SubProductTypeId");
 
                     b.ToTable("Product");
                 });
@@ -209,9 +209,9 @@ namespace BangazonWeb.Migrations
 
             modelBuilder.Entity("BangazonWeb.Models.Product", b =>
                 {
-                    b.HasOne("BangazonWeb.Models.ProductType", "ProductType")
+                    b.HasOne("BangazonWeb.Models.SubProductType", "SubProductType")
                         .WithMany()
-                        .HasForeignKey("ProductTypeId")
+                        .HasForeignKey("SubProductTypeId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
         }

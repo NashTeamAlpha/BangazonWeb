@@ -75,7 +75,7 @@ namespace BangazonWeb.Controllers
         {
             AllProductsViewModel model = new AllProductsViewModel(context);
 
-            model.Products =  await context.Product.Where(p => p.SubTypeId == id).ToListAsync();
+            model.Products =  await context.Product.Where(p => p.SubProductTypeId == id).ToListAsync();
 
             if (model.Products == null)
             {

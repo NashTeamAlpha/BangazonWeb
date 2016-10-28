@@ -11,6 +11,7 @@ namespace BangazonWeb.ViewModels
     public List<SelectListItem> ListOfCustomers { get; set; }
     private BangazonWebContext context;
     private ActiveCustomer singleton = ActiveCustomer.Instance;
+    public Customer CustomerForm {get; set; }
     public Customer ChosenCustomer 
     {
       get

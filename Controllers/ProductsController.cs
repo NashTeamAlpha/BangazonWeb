@@ -71,6 +71,23 @@ namespace BangazonWeb.Controllers
             return View(model);
         }
 
+        //Method Name: ProductsInSubType
+        //Purpose of the Method: This method gets all the products in a selected subtype and returns them.
+        //Arguments in Method: Gets the subtypeId from the route.
+        public async Task<IActionResult> ProductsInSubType([FromRoute] int id) 
+        {
+            AllProductsViewModel model = new AllProductsViewModel(context);
+
+            model.Products =  await context.Product.Where(p => p.SubProductTypeId == id).ToListAsync();
+
+            if (model.Products == null)
+            {
+                return NotFound();
+            }
+
+            return View(model);
+        }
+
         //Method Name: Single
         //Purpose of the Method: This method gets a specific product and returns it to the view.
         //Arguments in Method: The ProductId of the product you wish to pass to the view.

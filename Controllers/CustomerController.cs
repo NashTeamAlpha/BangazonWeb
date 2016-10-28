@@ -15,7 +15,7 @@ namespace BangazonWeb.Controllers
     // Methods in Class: New(), Overloaded New(Customer customer) ShoppingCart(), Payment(), OrderCompleted().
     public class CustomerController : Controller
     {
-        //Bringing in the context from our DB and storing it in a local varialbe named BangazonWebContext.
+        //Bringing in the context from our DB and storing it in a local variable named BangazonWebContext.
         private BangazonWebContext context;
         public CustomerController(BangazonWebContext ctx)
         {

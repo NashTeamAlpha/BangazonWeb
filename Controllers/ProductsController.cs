@@ -1,8 +1,8 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using BangazonWeb.Models;
 using BangazonWeb.Data;
+using BangazonWeb.Models;
 using BangazonWeb.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -60,15 +60,14 @@ namespace BangazonWeb.Controllers
                 return NotFound();
             }
             
-            AllProductsViewModel model = new AllProductsViewModel(context);
-
-            model.Products =  await context.Product.Where(p => p.ProductTypeId == id).ToListAsync();
-
-            if (model.Products == null)
+            var ProductsInSubType = await context.Product.Where(p => p.SubProductTypeId == id).ToListAsync();
+            //var ProductsInType = await context.Product.ToListAsync(p => p.ProductTypeId == id);    weren't sure if this would work
+            
+            if (ProductsInSubType == null)
             {
                 return NotFound();
             }
-            return View(model);
+            return View(ProductsInSubType);
         }
 
         //Method Name: ProductsInSubType
@@ -115,8 +114,7 @@ namespace BangazonWeb.Controllers
         //Arguments in Method: None.
         public IActionResult New()
         {
-            BaseViewModel model = new BaseViewModel(context);
-
+            ProductTypesListViewModel model = new ProductTypesListViewModel(context);
             return View(model);
         }
 
@@ -125,7 +123,7 @@ namespace BangazonWeb.Controllers
         //Arguments in Method: This method takes in an argument of type Product from the form.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> New([FromBody] Product product)
+        public async Task<IActionResult> New(Product product)
         {
             if (ModelState.IsValid)
             {
@@ -152,7 +150,7 @@ namespace BangazonWeb.Controllers
              {
                  var order = new Order();
                  order.IsCompleted = false;
-                 order.CustomerId = Convert.ToInt32(singleton.Customer.CustomerId);
+                 order.CustomerId = singleton.Customer.CustomerId;
                  context.Add(order);
                  await context.SaveChangesAsync();
                  var newOrder = await context.Order.Where(o => o.IsCompleted == false && o.CustomerId==singleton.Customer.CustomerId).SingleOrDefaultAsync();
@@ -175,6 +173,16 @@ namespace BangazonWeb.Controllers
              }
          }
 
+        //Method Name: GetSubTypes
+        //Purpose of the Method: This method is called when the user changes the Product Type dropdown list to select a larger product category. The method grabs all subTypes within that Product Type and returns them in a Json format. 
+        //Arguments in Method: Takes in an integer, which is equal to the ProductTypeId of the selected larger Product Category. 
+        [HttpPost]
+        public IActionResult GetSubTypes([FromRoute]int id)
+        {
+            //get sub categories with that product type on them
+            var subTypes = context.SubProductType.Where(p => p.ProductTypeId == id).ToList();
+            return Json(subTypes);
+        }
         //Method Name: Error
         //Purpose of the Method: Default error message, return Error view.
         //Arguments in Method: None.

@@ -28,14 +28,14 @@ namespace BangazonWeb.ViewModels
           }).ToList();
         this.ProductTypesList.Insert(0, new SelectListItem{
           Text = "Choose Product Category",
-          Value = null
+          Value = ""
         });
 
         this.SubProductTypesList = new List<SelectListItem>();
 
         this.SubProductTypesList.Insert(0, new SelectListItem{
-          Text = "Choose Sub-Category",
-          Value = null
+          Text = "Choose a Product Category to See Sub-Categories",
+          Value = ""
         });
     }
   }

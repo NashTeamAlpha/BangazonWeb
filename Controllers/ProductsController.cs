@@ -61,7 +61,6 @@ namespace BangazonWeb.Controllers
             }
             
             var ProductsInSubType = await context.Product.Where(p => p.SubProductTypeId == id).ToListAsync();
-            //var ProductsInType = await context.Product.ToListAsync(p => p.ProductTypeId == id);    weren't sure if this would work
             
             if (ProductsInSubType == null)
             {

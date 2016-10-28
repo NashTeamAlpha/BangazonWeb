@@ -68,6 +68,20 @@ namespace BangazonWeb.Controllers
             return View(model);
         }
 
+        public async Task<IActionResult> ProductsInSubType([FromRoute] int id) 
+        {
+            AllProductsViewModel model = new AllProductsViewModel(context);
+
+            model.Products =  await context.Product.Where(p => p.SubTypeId == id).ToListAsync();
+
+            if (model.Products == null)
+            {
+                return NotFound();
+            }
+
+            return View(model);
+        }
+
         //Method Name: Single
         //Purpose of the Method: This method is called when a user clicks on an inidividual product and gets the data from the database about that product to be returned to the view
         //Arguments in Method: Takes an integer from the route that matched the product selected's product id

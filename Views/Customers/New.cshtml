@@ -1,28 +1,28 @@
-@model BangazonWeb.Models.Customer
+@model BangazonWeb.ViewModels.BaseViewModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Join BangazonWeb";
 }
 
 <h2>@ViewData["Title"]</h2>
 
-<form asp-action="Create">
+<form asp-controller="Customer" asp-action="New" method="post">
     <div class="form-horizontal">
         <h4>Join BangazonWeb</h4>
         <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
-            <label asp-for="First Name" class="col-md-2 control-label"></label>
+            <label asp-for="CustomerForm.FirstName" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="FirstName" class="form-control" />
-                <span asp-validation-for="FirstName" class="text-danger" />
+                <input asp-for="CustomerForm.FirstName" class="form-control" />
+                <span asp-validation-for="CustomerForm.FirstName" class="text-danger" />
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="Last Name" class="col-md-2 control-label"></label>
+            <label asp-for="CustomerForm.LastName" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="LastName" class="form-control" />
-                <span asp-validation-for="LastName" class="text-danger" />
+                <input asp-for="CustomerForm.LastName" class="form-control" />
+                <span asp-validation-for="CustomerForm.LastName" class="text-danger" />
             </div>
         </div>
         <div class="form-group">

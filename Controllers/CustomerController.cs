@@ -9,15 +9,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BangazonWeb.Controllers
 {
-    // Class Name: CustomersController
+    // Class Name: CustomerController
     // Authors: Chris Smalley, Zack Repass
     // Purpose of the class: The purpose of this class is to manage the methods that will produce the data and functionality needed for all of the views in the user interface related to customers.
     // Methods in Class: New(), Overloaded New(Customer customer) ShoppingCart(), Payment(), OrderCompleted().
-    public class CustomersController : Controller
+    public class CustomerController : Controller
     {
         //Bringing in the context from our DB and storing it in a local variable named BangazonWebContext.
         private BangazonWebContext context;
-        public CustomersController(BangazonWebContext ctx)
+        public CustomerController(BangazonWebContext ctx)
         {
             context = ctx;
         }

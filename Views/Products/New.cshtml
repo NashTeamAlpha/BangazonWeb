@@ -6,7 +6,7 @@
 
 <h1> Add a New Product </h1>
 
-<form asp-action="New" enctype="application/x-www-form-urlencoded">
+<form asp-controller="Products" asp-action="New" method="post">
   <div class="form-horizontal">
     <h4> Product </h4>
     <hr />
@@ -14,7 +14,7 @@
       <div class="form-group">
         <label asp-for="Product.Name" class="col-md-2 control-label"></label>
         <div class="col-md-10">
-          <input asp-for="Product.Name" class="form-control" />
+          <input asp-for="Product.Name" class="form-control" type="text" />
           <span asp-validation-for="Product.Name" class="text-danger" />
           @Html.ValidationMessage("Product.Name")
         </div>
@@ -22,7 +22,7 @@
       <div class="form-group">
         <label asp-for="Product.Description" class="col-md-2 control-label"></label>
         <div class="col-md-10">
-            <input asp-for="Product.Description" class="form-control" />
+            <input asp-for="Product.Description" class="form-control" type="text" />
             <span asp-validation-for="Product.Description" class="text-danger" />
             @Html.ValidationMessage("Product.Description")
         </div>
@@ -30,7 +30,7 @@
       <div class="form-group">
         <label asp-for="Product.Price" class="col-md-2 control-label"></label>
         <div class="col-md-10">
-            <input asp-for="Product.Price" class="form-control" />
+            <input asp-for="Product.Price" class="form-control" type="number" />
             <span asp-validation-for="Product.Price" class="text-danger" />
             @Html.ValidationMessage("Product.Price")
         </div>

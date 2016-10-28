@@ -124,7 +124,7 @@ namespace BangazonWeb.Controllers
              {
                  var order = new Order();
                  order.IsCompleted = false;
-                 order.CustomerId = Convert.ToInt32(singleton.Customer.CustomerId);
+                 order.CustomerId = singleton.Customer.CustomerId;
                  context.Add(order);
                  await context.SaveChangesAsync();
                  var newOrder = await context.Order.Where(o => o.IsCompleted == false && o.CustomerId==singleton.Customer.CustomerId).SingleOrDefaultAsync();
@@ -139,7 +139,7 @@ namespace BangazonWeb.Controllers
             {
                  var lineItem = new LineItem();
                  lineItem.OrderId = activeOrder.OrderId;
-                 lineItem.ProductId = Convert.ToInt32(id);
+                 lineItem.ProductId = id;
                  context.Add(lineItem);
                  await context.SaveChangesAsync();
                  return RedirectToAction("Index");

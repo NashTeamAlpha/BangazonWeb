@@ -8,7 +8,7 @@ using BangazonWeb.Data;
 namespace BangazonWeb.Migrations
 {
     [DbContext(typeof(BangazonWebContext))]
-    [Migration("20161028170211_InitialCreate")]
+    [Migration("20161028190510_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -22,10 +22,12 @@ namespace BangazonWeb.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("FirstName")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 50);
 
                     b.Property<string>("LastName")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 50);
 
                     b.HasKey("CustomerId");
 
@@ -85,26 +87,32 @@ namespace BangazonWeb.Migrations
                     b.Property<int>("CardNumber");
 
                     b.Property<string>("City")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 50);
 
                     b.Property<int>("CustomerId");
 
                     b.Property<DateTime>("ExpirationDate");
 
                     b.Property<string>("FirstName")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 50);
 
                     b.Property<string>("LastName")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 50);
 
                     b.Property<string>("Processor")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 25);
 
                     b.Property<string>("State")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 2);
 
                     b.Property<string>("StreetAddress")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 80);
 
                     b.Property<int>("ZipCode");
 
@@ -129,7 +137,8 @@ namespace BangazonWeb.Migrations
                         .HasAnnotation("MaxLength", 255);
 
                     b.Property<string>("Name")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 100);
 
                     b.Property<double>("Price");
 
@@ -165,7 +174,8 @@ namespace BangazonWeb.Migrations
                         .HasAnnotation("MaxLength", 255);
 
                     b.Property<string>("Name")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 100);
 
                     b.Property<int>("ProductTypeId");
 

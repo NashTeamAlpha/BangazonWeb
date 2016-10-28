@@ -88,16 +88,16 @@ namespace BangazonWeb.Migrations
                     Description = table.Column<string>(maxLength: 255, nullable: false),
                     Name = table.Column<string>(nullable: false),
                     Price = table.Column<double>(nullable: false),
-                    ProductTypeId = table.Column<int>(nullable: false)
+                    SubProductTypeId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Product", x => x.ProductId);
                     table.ForeignKey(
-                        name: "FK_Product_ProductType_ProductTypeId",
-                        column: x => x.ProductTypeId,
-                        principalTable: "ProductType",
-                        principalColumn: "ProductTypeId",
+                        name: "FK_Product_SubProductType_SubProductTypeId",
+                        column: x => x.SubProductTypeId,
+                        principalTable: "SubProductType",
+                        principalColumn: "SubProductTypeId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -182,9 +182,9 @@ namespace BangazonWeb.Migrations
                 column: "CustomerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Product_ProductTypeId",
+                name: "IX_Product_SubProductTypeId",
                 table: "Product",
-                column: "ProductTypeId");
+                column: "SubProductTypeId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -193,7 +193,7 @@ namespace BangazonWeb.Migrations
                 name: "LineItem");
 
             migrationBuilder.DropTable(
-                name: "SubProductType");
+                name: "ProductType");
 
             migrationBuilder.DropTable(
                 name: "Order");
@@ -205,7 +205,7 @@ namespace BangazonWeb.Migrations
                 name: "PaymentType");
 
             migrationBuilder.DropTable(
-                name: "ProductType");
+                name: "SubProductType");
 
             migrationBuilder.DropTable(
                 name: "Customer");

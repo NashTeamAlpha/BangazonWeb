@@ -6,53 +6,56 @@
 
 <h1> Add a New Product </h1>
 
-<!--<form asp-action="New">
+<form asp-action="New" enctype="application/x-www-form-urlencoded">
   <div class="form-horizontal">
     <h4> Product </h4>
     <hr />
     <div asp-validation-summary="ModelOnly" class="text-danger">
       <div class="form-group">
-        <label asp-for="Name" class="col-md-2 control-label"></label>
+        <label asp-for="Product.Name" class="col-md-2 control-label"></label>
         <div class="col-md-10">
-          <input asp-for="Name" class="form-control" />
-          <span asp-validation-for="Name" class="text-danger" />
+          <input asp-for="Product.Name" class="form-control" />
+          <span asp-validation-for="Product.Name" class="text-danger" />
+          @Html.ValidationMessage("Product.Name")
         </div>
       </div>
       <div class="form-group">
-        <label asp-for="Description" class="col-md-2 control-label"></label>
+        <label asp-for="Product.Description" class="col-md-2 control-label"></label>
         <div class="col-md-10">
-            <input asp-for="Description" class="form-control" />
-            <span asp-validation-for="Description" class="text-danger" />
+            <input asp-for="Product.Description" class="form-control" />
+            <span asp-validation-for="Product.Description" class="text-danger" />
+            @Html.ValidationMessage("Product.Description")
         </div>
       </div>
       <div class="form-group">
-        <label asp-for="Price" class="col-md-2 control-label"></label>
+        <label asp-for="Product.Price" class="col-md-2 control-label"></label>
         <div class="col-md-10">
-            <input asp-for="Price" class="form-control" />
-            <span asp-validation-for="Price" class="text-danger" />
+            <input asp-for="Product.Price" class="form-control" />
+            <span asp-validation-for="Product.Price" class="text-danger" />
+            @Html.ValidationMessage("Product.Price")
         </div>
       </div>
-      <div class="form-group">-->
+      <div class="form-group">
         <label asp-for="ProductTypesList" class="col-md-2 control-label"></label>
         <div class="col-md-10">
             @Html.DropDownList("ProductTypesList")
             <span asp-validation-for="ProductTypesList" class="text-danger" />
         </div>
-      <!--</div>
-      <div class="form-group">-->
+      </div>
+      <div class="form-group">
         <label asp-for="SubProductTypesList" class="col-md-2 control-label"></label>
         <div class="col-md-10">
             @Html.DropDownList("SubProductTypesList")
-            <span asp-validation-for="SubProductTypesList" class="text-danger" />
+            <span asp-validation-for="Product.SubProductTypeId" class="text-danger" />
         </div>
-      <!--</div>
+      </div>
       <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Add Product" class="btn btn-default" asp-action="New" />
+            <input type="submit" value="Add Product" class="btn btn-default" />
         </div>
       </div>
     </div>
-</form>-->
+</form>
 
 <div>
     <a asp-action="Index">Back to List</a>

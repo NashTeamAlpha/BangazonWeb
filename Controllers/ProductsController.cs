@@ -51,14 +51,14 @@ namespace BangazonWeb.Controllers
                 return NotFound();
             }
             
-            var ProductsInType = await context.Product.Where(p => p.ProductTypeId == id).ToListAsync();
+            var ProductsInSubType = await context.Product.Where(p => p.SubProductTypeId == id).ToListAsync();
             //var ProductsInType = await context.Product.ToListAsync(p => p.ProductTypeId == id);    weren't sure if this would work
             
-            if (ProductsInType == null)
+            if (ProductsInSubType == null)
             {
                 return NotFound();
             }
-            return View(ProductsInType);
+            return View(ProductsInSubType);
         }
         //Method Name: Single
         //Purpose of the Method: This method is called when a user clicks on an inidividual product and gets the data from the database about that product to be returned to the view
@@ -84,26 +84,25 @@ namespace BangazonWeb.Controllers
         public IActionResult New()
         {
             ProductTypesListViewModel model = new ProductTypesListViewModel(context);
-            // model.Product = context.Product
             return View(model);
         }
 
         // //Method Name: New
         // //Purpose of the Method: This method takes information from the add product form and posts that information to the database, if it is valid. If the information is invalid, the user will be returned back to the form view. 
         // //Arguments in Method: This method takes in an argument of type Product from the form 
-        // [HttpPost]
-        // [ValidateAntiForgeryToken]
-        // public async Task<IActionResult> New([FromBody] Product product)
-        // {
-        //     if (ModelState.IsValid)
-        //     {
-        //         context.Add(product);
-        //         await context.SaveChangesAsync();
-        //         return RedirectToAction("Index");
-        //     }
-        //     //Make sure error messages are present in the view if the view is returned to the customer
-        //     return View(product);
-        // }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> New([FromBody] Product product)
+        {
+            if (ModelState.IsValid)
+            {
+                context.Add(product);
+                await context.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            //Make sure error messages are present in the view if the view is returned to the customer
+            return View(product);
+        }
         // [HttpPost]
         // [ValidateAntiForgeryToken]
         // public async Task<IActionResult> AddToCart([FromRoute] int? id)

@@ -14,8 +14,8 @@ namespace BangazonWeb.Migrations
                 {
                     CustomerId = table.Column<int>(nullable: false)
                         .Annotation("Autoincrement", true),
-                    FirstName = table.Column<string>(nullable: false),
-                    LastName = table.Column<string>(nullable: false)
+                    FirstName = table.Column<string>(maxLength: 50, nullable: false),
+                    LastName = table.Column<string>(maxLength: 50, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -42,7 +42,7 @@ namespace BangazonWeb.Migrations
                     SubProductTypeId = table.Column<int>(nullable: false)
                         .Annotation("Autoincrement", true),
                     Description = table.Column<string>(maxLength: 255, nullable: false),
-                    Name = table.Column<string>(nullable: false),
+                    Name = table.Column<string>(maxLength: 100, nullable: false),
                     ProductTypeId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -57,14 +57,14 @@ namespace BangazonWeb.Migrations
                     PaymentTypeId = table.Column<int>(nullable: false)
                         .Annotation("Autoincrement", true),
                     CardNumber = table.Column<int>(nullable: false),
-                    City = table.Column<string>(nullable: false),
+                    City = table.Column<string>(maxLength: 50, nullable: false),
                     CustomerId = table.Column<int>(nullable: false),
                     ExpirationDate = table.Column<DateTime>(nullable: false),
-                    FirstName = table.Column<string>(nullable: false),
-                    LastName = table.Column<string>(nullable: false),
-                    Processor = table.Column<string>(nullable: false),
-                    State = table.Column<string>(nullable: false),
-                    StreetAddress = table.Column<string>(nullable: false),
+                    FirstName = table.Column<string>(maxLength: 50, nullable: false),
+                    LastName = table.Column<string>(maxLength: 50, nullable: false),
+                    Processor = table.Column<string>(maxLength: 25, nullable: false),
+                    State = table.Column<string>(maxLength: 2, nullable: false),
+                    StreetAddress = table.Column<string>(maxLength: 80, nullable: false),
                     ZipCode = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -86,18 +86,18 @@ namespace BangazonWeb.Migrations
                         .Annotation("Autoincrement", true),
                     DateCreated = table.Column<DateTime>(nullable: false, defaultValueSql: "strftime('%Y-%m-%d %H:%M:%S')"),
                     Description = table.Column<string>(maxLength: 255, nullable: false),
-                    Name = table.Column<string>(nullable: false),
+                    Name = table.Column<string>(maxLength: 100, nullable: false),
                     Price = table.Column<double>(nullable: false),
-                    ProductTypeId = table.Column<int>(nullable: false)
+                    SubProductTypeId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Product", x => x.ProductId);
                     table.ForeignKey(
-                        name: "FK_Product_ProductType_ProductTypeId",
-                        column: x => x.ProductTypeId,
-                        principalTable: "ProductType",
-                        principalColumn: "ProductTypeId",
+                        name: "FK_Product_SubProductType_SubProductTypeId",
+                        column: x => x.SubProductTypeId,
+                        principalTable: "SubProductType",
+                        principalColumn: "SubProductTypeId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -182,9 +182,9 @@ namespace BangazonWeb.Migrations
                 column: "CustomerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Product_ProductTypeId",
+                name: "IX_Product_SubProductTypeId",
                 table: "Product",
-                column: "ProductTypeId");
+                column: "SubProductTypeId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -193,7 +193,7 @@ namespace BangazonWeb.Migrations
                 name: "LineItem");
 
             migrationBuilder.DropTable(
-                name: "SubProductType");
+                name: "ProductType");
 
             migrationBuilder.DropTable(
                 name: "Order");
@@ -205,7 +205,7 @@ namespace BangazonWeb.Migrations
                 name: "PaymentType");
 
             migrationBuilder.DropTable(
-                name: "ProductType");
+                name: "SubProductType");
 
             migrationBuilder.DropTable(
                 name: "Customer");

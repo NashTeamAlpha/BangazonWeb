@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BangazonWeb.Models;
@@ -61,18 +62,29 @@ namespace BangazonWeb.Controllers
         [HttpGet]
         public async Task<IActionResult> ShoppingCart()
         {
-            var activeOrder = await context.Order.Where(o => o.IsCompleted == false && o.CustomerId==singleton.Customer.CustomerId).SingleOrDefaultAsync(); 
+            var activeOrder = await context.Order.Where(o => o.IsCompleted == false && o.CustomerId==singleton.Customer.CustomerId).SingleOrDefaultAsync();
+
             if (activeOrder == null)
             {
                 var order = new Order();
                 order.IsCompleted = false;
-                order.CustomerId = Convert.ToInt32(singleton.Customer.CustomerId);
+                order.CustomerId = singleton.Customer.CustomerId;
                 context.Add(order);
                 await context.SaveChangesAsync();
             }
-            ShoppingCartViewModel model = new ShoppingCartViewModel(context);
 
-            model.LineItems = activeOrder.LineItems;
+            ShoppingCartViewModel model = new ShoppingCartViewModel(context);
+     
+            List<LineItem> LineItemsOnActiveOrder = activeOrder.LineItems.ToList();
+
+            List<Product> ListOfProductsOnActiveOrder = new List<Product>();
+
+            for(var i = 0; i < LineItemsOnActiveOrder.Count(); i++)
+            {
+                ListOfProductsOnActiveOrder.Add(LineItemsOnActiveOrder[i].Product);
+            }
+
+            model.Products = ListOfProductsOnActiveOrder;
 
             return View(model);
             

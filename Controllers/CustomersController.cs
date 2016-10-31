@@ -61,18 +61,18 @@ namespace BangazonWeb.Controllers
         [HttpGet]
         public async Task<IActionResult> ShoppingCart()
         {
-            var activeOrder = await context.Order.Where(o => o.IsCompleted == false && o.CustomerId==singleton.Customer.CustomerId).SingleOrDefaultAsync(); 
-            if (activeOrder == null)
-            {
-                var order = new Order();
-                order.IsCompleted = false;
-                order.CustomerId = Convert.ToInt32(singleton.Customer.CustomerId);
-                context.Add(order);
-                await context.SaveChangesAsync();
-            }
+            // var activeOrder = await context.Order.Where(o => o.IsCompleted == false && o.CustomerId==singleton.Customer.CustomerId).SingleOrDefaultAsync(); 
+            // if (activeOrder == null)
+            // {
+            //     var order = new Order();
+            //     order.IsCompleted = false;
+            //     order.CustomerId = Convert.ToInt32(singleton.Customer.CustomerId);
+            //     context.Add(order);
+            //     await context.SaveChangesAsync();
+            // }
             ShoppingCartViewModel model = new ShoppingCartViewModel(context);
 
-            model.LineItems = activeOrder.LineItems;
+            // model.LineItems = activeOrder.LineItems;
 
             return View(model);
             

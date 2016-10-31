@@ -24,6 +24,24 @@ namespace BangazonWeb.ViewModels
         return "ShoppingCart";
       }
     }
+    public int? ShoppingCartItems {
+      get {
+        Customer customer = singleton.Customer;
+        // If no customer has been chosen yet, it's value will be null
+        if (customer == null)
+        {
+          // Return New route
+          return null;
+        }
+        if (customer != null){
+            var LineItems = context.Order
+              .Where(o => o.CustomerId == customer.CustomerId && o.IsCompleted == false)
+              .
+
+          }
+        }
+      }
+    }
     public Customer ChosenCustomer 
     {
       get

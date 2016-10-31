@@ -8,6 +8,7 @@ namespace BangazonWeb.Models
     [Key]
     public int SubProductTypeId {get; set;}
     [Required]
+    [StringLength(100)]
     public string Name {get; set;}
     [Required]
     [StringLength(255)]

@@ -131,7 +131,7 @@ namespace BangazonWeb.Controllers
                 return RedirectToAction("Index");
             }
             //Make sure error messages are present in the view if the view is returned to the customer.
-            return NotFound();
+            return BadRequest();
         }
 
          //Method Name: AddToCart

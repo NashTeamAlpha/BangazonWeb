@@ -10,11 +10,13 @@ namespace BangazonWeb.Models
     [Key]
     public int ProductId { get; set; }
     [Required]
+    [StringLength(100)]
     public string Name { get; set; }
     [Required]
     [StringLength(255)]
     public string Description { get; set; }
     [Required]
+    [DataType(DataType.Currency)]
     public double Price { get; set; }
     [Required]
     [DataType(DataType.Date)]

@@ -1,4 +1,4 @@
-@model BangazonWeb.ViewModels.BaseViewModel
+@model BangazonWeb.ViewModels.NewCustomerViewModel
 
 @{
     ViewData["Title"] = "Join BangazonWeb";
@@ -12,17 +12,17 @@
         <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
-            <label asp-for="CustomerForm.FirstName" class="col-md-2 control-label"></label>
+            <label asp-for="Customer.FirstName" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="CustomerForm.FirstName" class="form-control" />
-                <span asp-validation-for="CustomerForm.FirstName" class="text-danger" />
+                <input asp-for="Customer.FirstName" class="form-control" />
+                <span asp-validation-for="Customer.FirstName" class="text-danger" />
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="CustomerForm.LastName" class="col-md-2 control-label"></label>
+            <label asp-for="Customer.LastName" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="CustomerForm.LastName" class="form-control" />
-                <span asp-validation-for="CustomerForm.LastName" class="text-danger" />
+                <input asp-for="Customer.LastName" class="form-control" />
+                <span asp-validation-for="Customer.LastName" class="text-danger" />
             </div>
         </div>
         <div class="form-group">

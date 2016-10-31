@@ -31,7 +31,8 @@ namespace BangazonWeb.Controllers
         [HttpGet]
         public IActionResult New()
         {
-            BaseViewModel model = new BaseViewModel(context);
+
+            NewCustomerViewModel model = new NewCustomerViewModel(context);
             return View(model);
         }
 
@@ -46,7 +47,7 @@ namespace BangazonWeb.Controllers
             {
                 context.Add(customer);
                 await context.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Products");
             }
             return BadRequest();
         }

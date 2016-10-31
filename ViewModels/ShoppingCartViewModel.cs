@@ -13,7 +13,7 @@ namespace BangazonWeb.ViewModels
   public class ShoppingCartViewModel : BaseViewModel
   {
     public List<SelectListItem> ListOfPaymentTypes { get; set; }
-    public IEnumerable<LineItem> LineItems { get; set; }
+    public IEnumerable<Product> Products { get; set; }
     private BangazonWebContext context;
     private ActiveCustomer singleton = ActiveCustomer.Instance;
     

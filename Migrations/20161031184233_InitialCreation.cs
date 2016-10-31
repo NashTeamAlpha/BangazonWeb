@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BangazonWeb.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class InitialCreation : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -108,7 +108,7 @@ namespace BangazonWeb.Migrations
                     OrderId = table.Column<int>(nullable: false)
                         .Annotation("Autoincrement", true),
                     CustomerId = table.Column<int>(nullable: false),
-                    DateCompleted = table.Column<DateTime>(nullable: false),
+                    DateCompleted = table.Column<DateTime>(nullable: true),
                     DateCreated = table.Column<DateTime>(nullable: false, defaultValueSql: "strftime('%Y-%m-%d %H:%M:%S')"),
                     IsCompleted = table.Column<bool>(nullable: false),
                     PaymentTypeId = table.Column<int>(nullable: true)

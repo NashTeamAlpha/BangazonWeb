@@ -7,6 +7,7 @@ namespace BangazonWeb.ViewModels
   public class AllProductsViewModel : BaseViewModel
   {
     public IEnumerable<Product> Products { get; set; }
+    public SubProductType SubProductType { get; set; }
     public AllProductsViewModel(BangazonWebContext ctx) : base(ctx) { }
   }
 }

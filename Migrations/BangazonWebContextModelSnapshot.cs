@@ -58,7 +58,7 @@ namespace BangazonWeb.Migrations
 
                     b.Property<int>("CustomerId");
 
-                    b.Property<DateTime>("DateCompleted")
+                    b.Property<DateTime?>("DateCompleted")
                         .ValueGeneratedOnAddOrUpdate();
 
                     b.Property<DateTime>("DateCreated")

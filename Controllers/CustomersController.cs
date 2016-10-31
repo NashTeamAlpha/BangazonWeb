@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BangazonWeb.Models;
@@ -61,21 +62,36 @@ namespace BangazonWeb.Controllers
         [HttpGet]
         public async Task<IActionResult> ShoppingCart()
         {
-            // var activeOrder = await context.Order.Where(o => o.IsCompleted == false && o.CustomerId==singleton.Customer.CustomerId).SingleOrDefaultAsync(); 
-            // if (activeOrder == null)
-            // {
-            //     var order = new Order();
-            //     order.IsCompleted = false;
-            //     order.CustomerId = Convert.ToInt32(singleton.Customer.CustomerId);
-            //     context.Add(order);
-            //     await context.SaveChangesAsync();
-            // }
+
+            var activeOrder = await context.Order.Where(o => o.IsCompleted == false && o.CustomerId==singleton.Customer.CustomerId).SingleOrDefaultAsync();
+            Console.WriteLine(activeOrder);
+
             ShoppingCartViewModel model = new ShoppingCartViewModel(context);
 
-            // model.LineItems = activeOrder.LineItems;
+            if (activeOrder == null)
+            {
+                model.Products = context.Product.ToList();
+                return View(model);
+            }
+            if (activeOrder != null)
+            {
 
-            return View(model);
+            // List<LineItem> LineItemsOnActiveOrder = activeOrder.LineItems.ToList();
             
+            //     List<Product> ListOfProductsOnActiveOrder = new List<Product>();
+
+            //     for(var i = 0; i < LineItemsOnActiveOrder.Count(); i++)
+            //     {
+            //         ListOfProductsOnActiveOrder.Add(LineItemsOnActiveOrder[i].Product);
+            //     }
+
+
+            //     model.Products = ListOfProductsOnActiveOrder;
+
+                return View(model);
+            
+            }
+            return View(model);
         }
 
         //Method Name: Payment

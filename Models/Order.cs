@@ -25,9 +25,8 @@ namespace BangazonWeb.Models
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Computed)]
         public DateTime DateCreated {get;set;}
 
-        [Required]
         [DataTypeAttribute(DataType.Date)]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Computed)]
-        public DateTime DateCompleted {get;set;}
+        public DateTime? DateCompleted {get;set;}
     }
 }

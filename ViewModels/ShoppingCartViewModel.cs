@@ -20,7 +20,7 @@ namespace BangazonWeb.ViewModels
     //Method Name: ShoppingCartViewModel
     //Purpose of the Method: Upon construction this should take the context and send a list of select items of the type PaymentType to the View. They should be the paymentTypes of the active customer.
     //Arguments in Method: BangazonWebContext
-    public ShoppingCartViewModel(BangazonWebContext ctx)
+    public ShoppingCartViewModel(BangazonWebContext ctx) : base (ctx)
     {
         context = ctx;
         this.ListOfPaymentTypes = context.PaymentType

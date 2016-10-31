@@ -62,32 +62,36 @@ namespace BangazonWeb.Controllers
         [HttpGet]
         public async Task<IActionResult> ShoppingCart()
         {
+
             var activeOrder = await context.Order.Where(o => o.IsCompleted == false && o.CustomerId==singleton.Customer.CustomerId).SingleOrDefaultAsync();
+            Console.WriteLine(activeOrder);
+
+            ShoppingCartViewModel model = new ShoppingCartViewModel(context);
 
             if (activeOrder == null)
             {
-                var order = new Order();
-                order.IsCompleted = false;
-                order.CustomerId = singleton.Customer.CustomerId;
-                context.Add(order);
-                await context.SaveChangesAsync();
+                model.Products = context.Product.ToList();
+                return View(model);
             }
-
-            ShoppingCartViewModel model = new ShoppingCartViewModel(context);
-     
-            List<LineItem> LineItemsOnActiveOrder = activeOrder.LineItems.ToList();
-
-            List<Product> ListOfProductsOnActiveOrder = new List<Product>();
-
-            for(var i = 0; i < LineItemsOnActiveOrder.Count(); i++)
+            if (activeOrder != null)
             {
-                ListOfProductsOnActiveOrder.Add(LineItemsOnActiveOrder[i].Product);
-            }
 
-            model.Products = ListOfProductsOnActiveOrder;
-
-            return View(model);
+            // List<LineItem> LineItemsOnActiveOrder = activeOrder.LineItems.ToList();
             
+            //     List<Product> ListOfProductsOnActiveOrder = new List<Product>();
+
+            //     for(var i = 0; i < LineItemsOnActiveOrder.Count(); i++)
+            //     {
+            //         ListOfProductsOnActiveOrder.Add(LineItemsOnActiveOrder[i].Product);
+            //     }
+
+
+            //     model.Products = ListOfProductsOnActiveOrder;
+
+                return View(model);
+            
+            }
+            return View(model);
         }
 
         //Method Name: Payment

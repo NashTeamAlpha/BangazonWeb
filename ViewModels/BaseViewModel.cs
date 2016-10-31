@@ -24,22 +24,29 @@ namespace BangazonWeb.ViewModels
         return "ShoppingCart";
       }
     }
-    public int? ShoppingCartItems {
+    public string ShoppingCartItems {
       get {
         Customer customer = singleton.Customer;
-        // If no customer has been chosen yet, it's value will be null
+
         if (customer == null)
         {
-          // Return New route
-          return null;
+          // Return null because there should not be a number next to the link if a customer has not been chosen.
+          return "";
         }
         if (customer != null){
-            var LineItems = context.Order
-              .Where(o => o.CustomerId == customer.CustomerId && o.IsCompleted == false)
-              .
-
-          }
+          //If there is a customer but the customer does not have an active order then the shopping cart should have 0 items in it.
+           Order order = context.Order.Where(o => o.CustomerId == customer.CustomerId && o.IsCompleted == false).SingleOrDefault();
+           if (order == null){
+             return "0";
+           }
+           //If the user has an active order then the number of products in that order will be returned
+           if (order != null){
+            List<LineItem> lineItems = context.LineItem.Where(l => l.OrderId == order.OrderId).ToList();
+            return lineItems.Count.ToString();
+            // return "order";
+           }
         }
+        return "";
       }
     }
     public Customer ChosenCustomer 

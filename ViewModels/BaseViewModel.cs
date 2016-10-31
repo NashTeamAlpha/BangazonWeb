@@ -43,7 +43,6 @@ namespace BangazonWeb.ViewModels
            if (order != null){
             List<LineItem> lineItems = context.LineItem.Where(l => l.OrderId == order.OrderId).ToList();
             return lineItems.Count.ToString();
-            // return "order";
            }
         }
         return "";

@@ -8,7 +8,7 @@
   @foreach (var subProductType in Model.SubProductTypes)
   {
     <div class="col-md-4">
-      <a asp-action="TypesList" asp-route-id="@subProductType.SubProductTypeId">
+      <a asp-action="ProductsInSubType" asp-route-id="@subProductType.SubProductTypeId">
         @Html.DisplayFor(modelItem => subProductType.Name)
       </a>
     </div>

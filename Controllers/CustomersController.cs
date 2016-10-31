@@ -68,7 +68,7 @@ namespace BangazonWeb.Controllers
             {
                 var order = new Order();
                 order.IsCompleted = false;
-                order.CustomerId = Convert.ToInt32(singleton.Customer.CustomerId);
+                order.CustomerId = singleton.Customer.CustomerId;
                 context.Add(order);
                 await context.SaveChangesAsync();
             }

@@ -44,7 +44,7 @@
                                 @Html.DropDownList("ListOfCustomers")
                             }
                         </div>
-                        <a asp-area="" asp-controller="Customer" asp-action="New">@{ Html.RenderPartial("Menu"); } </a>
+                        @{ Html.RenderPartial("Menu"); }
                     </li>
                 </ul>
 

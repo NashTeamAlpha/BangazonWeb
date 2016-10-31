@@ -11,16 +11,29 @@ namespace BangazonWeb.ViewModels
     public List<SelectListItem> ListOfCustomers { get; set; }
     private BangazonWebContext context;
     private ActiveCustomer singleton = ActiveCustomer.Instance;
+    public string Route {
+      get {
+        Customer customer = singleton.Customer;
+        // If no customer has been chosen yet, it's value will be null
+        if (customer == null)
+        {
+          // Return New route
+          return "New";
+        }
+        //Return Shopping Cart Route
+        return "ShoppingCart";
+      }
+    }
     public Customer ChosenCustomer 
     {
       get
       {
         // Get the current value of the customer property of our singleton
         Customer customer = singleton.Customer;
-
         // If no customer has been chosen yet, it's value will be null
         if (customer == null)
         {
+
           // Return fake customer for now
           return new Customer () {
             FirstName = "Create",

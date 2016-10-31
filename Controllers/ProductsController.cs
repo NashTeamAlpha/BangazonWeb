@@ -59,14 +59,15 @@ namespace BangazonWeb.Controllers
             {
                 return NotFound();
             }
+            AllSubProductTypesViewModel model = new AllSubProductTypesViewModel(context);
+
+            model.SubProductTypes = await context.SubProductType.Where(p => p.ProductTypeId == id).ToListAsync();
             
-            var ProductsInSubType = await context.Product.Where(p => p.SubProductTypeId == id).ToListAsync();
-            
-            if (ProductsInSubType == null)
+            if (model.SubProductTypes == null)
             {
                 return NotFound();
             }
-            return View(ProductsInSubType);
+            return View(model);
         }
 
         //Method Name: ProductsInSubType

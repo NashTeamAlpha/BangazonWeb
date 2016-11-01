@@ -5,6 +5,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BangazonWeb.Models
 {
+    //Class Name: Order
+    //Author: Chris Smalley And Debbie Bourne
+    //Purpose of the class: This class serves as a model for our Order objects being transfered, manipulated, and saved between our Database, context, and Views.
+    //Methods in Class: None.
     public class Order
     {
         [Key]

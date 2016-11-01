@@ -6,7 +6,7 @@ namespace BangazonWeb.ViewModels
 {   //Class Name: SingleProductViewModel
     //Author: Zack Repass
     //Purpose of the Class: This ViewModel is for giving data to the Single.cshtml view, allowing customers to see each product individually.
-    //Methods in Class: SingleProductViewModel Constructor Method
+    //Methods in Class: None.
     
     public class SingleProductViewModel : BaseViewModel
     {

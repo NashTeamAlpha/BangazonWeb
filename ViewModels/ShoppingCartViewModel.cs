@@ -9,7 +9,7 @@ namespace BangazonWeb.ViewModels
     //Class Name: ShoppingCartViewModel
     //Author: Grant Regnier
     //Purpose of the class: The purpose of this class is to pass data from the controller to the shoppingcart view with a selectlist of PaymentTypes
-    //Methods in Class: ShoppingCartViewModel(ctx)
+    //Methods in Class: None.
   public class ShoppingCartViewModel : BaseViewModel
   {
     public List<SelectListItem> ListOfPaymentTypes { get; set; }

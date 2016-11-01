@@ -70,28 +70,29 @@ namespace BangazonWeb.Controllers
 
             if (activeOrder == null)
             {
-                model.Products = context.Product.ToList();
+               var product = new Product(){Description="You have no products in your cart!", Name=""};
+                model.Products = new List<Product>();
+                model.Products.Add(product);
                 return View(model);
             }
-            if (activeOrder != null)
+
+            List<LineItem> LineItemsOnActiveOrder = context.LineItem.Where(li => li.OrderId == activeOrder.OrderId).ToList();
+            
+            List<Product> ListOfProducts = new List<Product>();
+
+            double CartTotal = 0;
+
+            for(var i = 0; i < LineItemsOnActiveOrder.Count(); i++)
             {
-
-            // List<LineItem> LineItemsOnActiveOrder = activeOrder.LineItems.ToList();
-            
-            //     List<Product> ListOfProductsOnActiveOrder = new List<Product>();
-
-            //     for(var i = 0; i < LineItemsOnActiveOrder.Count(); i++)
-            //     {
-            //         ListOfProductsOnActiveOrder.Add(LineItemsOnActiveOrder[i].Product);
-            //     }
-
-
-            //     model.Products = ListOfProductsOnActiveOrder;
-
-                return View(model);
-            
+                ListOfProducts.Add(context.Product.Where(p => p.ProductId == LineItemsOnActiveOrder[i].ProductId).SingleOrDefault());
+                CartTotal += context.Product.Where(p => p.ProductId == LineItemsOnActiveOrder[i].ProductId).SingleOrDefault().Price;
             }
+
+            model.CartTotal = CartTotal;
+            model.Products = ListOfProducts;
+
             return View(model);
+            
         }
 
         //Method Name: Payment
@@ -101,7 +102,7 @@ namespace BangazonWeb.Controllers
          public IActionResult Payment()
         {
 
-            BaseViewModel model = new BaseViewModel(context);
+            PaymentTypeViewModel model = new PaymentTypeViewModel(context);
 
             return View(model);
         }
@@ -110,11 +111,11 @@ namespace BangazonWeb.Controllers
         //Purpose of the Method: This is the Overloaded method that actually adds the payments to the Db.
         //Arguments in Method: Takes a new PaymentType object from the form provided and posts it to the database.
         [HttpPost]
-        public async Task<IActionResult> Payment(PaymentType payment)
+        public async Task<IActionResult> Payment([FromForm]PaymentType paymentType)
         {
             if (ModelState.IsValid)
             {
-                context.Add(payment);
+                context.Add(paymentType);
                 await context.SaveChangesAsync();
                 return RedirectToAction("ShoppingCart");
             }

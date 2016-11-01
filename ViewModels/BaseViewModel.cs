@@ -41,12 +41,13 @@ namespace BangazonWeb.ViewModels
           //If there is a customer but the customer does not have an active order then the shopping cart should have 0 items in it.
            Order order = context.Order.Where(o => o.CustomerId == customer.CustomerId && o.IsCompleted == false).SingleOrDefault();
            if (order == null){
-             return "0";
+             return " (0)";
            }
            //If the user has an active order then the number of products in that order will be returned
            if (order != null){
             List<LineItem> lineItems = context.LineItem.Where(l => l.OrderId == order.OrderId).ToList();
-            return lineItems.Count.ToString();
+            string shoppingCartCount = lineItems.Count.ToString();
+            return " ("+shoppingCartCount+")";
            }
         }
         return "";

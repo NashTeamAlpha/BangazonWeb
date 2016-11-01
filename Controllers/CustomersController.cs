@@ -75,21 +75,23 @@ namespace BangazonWeb.Controllers
                 model.Products.Add(product);
                 return View(model);
             }
-            
 
             List<LineItem> LineItemsOnActiveOrder = context.LineItem.Where(li => li.OrderId == activeOrder.OrderId).ToList();
             
-               
-            List<Product> products = new List<Product>();
+            List<Product> ListOfProducts = new List<Product>();
+
+            double CartTotal = 0;
+
             for(var i = 0; i < LineItemsOnActiveOrder.Count(); i++)
             {
-                products.Add(context.Product.Where(p => p.ProductId == LineItemsOnActiveOrder[i].ProductId).SingleOrDefault());
+                ListOfProducts.Add(context.Product.Where(p => p.ProductId == LineItemsOnActiveOrder[i].ProductId).SingleOrDefault());
+                CartTotal += context.Product.Where(p => p.ProductId == LineItemsOnActiveOrder[i].ProductId).SingleOrDefault().Price;
             }
-            model.Products = products;
+
+            model.CartTotal = CartTotal;
+            model.Products = ListOfProducts;
 
             return View(model);
-            
-            
             
         }
 

@@ -14,6 +14,7 @@ namespace BangazonWeb.ViewModels
   {
     public List<SelectListItem> ListOfPaymentTypes { get; set; }
     public List<Product> Products { get; set; }
+    public double CartTotal {get; set;}
     private BangazonWebContext context;
     private ActiveCustomer singleton = ActiveCustomer.Instance;
     

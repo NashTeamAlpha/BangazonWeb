@@ -70,28 +70,27 @@ namespace BangazonWeb.Controllers
 
             if (activeOrder == null)
             {
-                model.Products = context.Product.ToList();
+               var product = new Product(){Description="You have no products in your cart!", Name=""};
+                model.Products = new List<Product>();
+                model.Products.Add(product);
                 return View(model);
             }
-            if (activeOrder != null)
+            
+
+            List<LineItem> LineItemsOnActiveOrder = context.LineItem.Where(li => li.OrderId == activeOrder.OrderId).ToList();
+            
+               
+            List<Product> products = new List<Product>();
+            for(var i = 0; i < LineItemsOnActiveOrder.Count(); i++)
             {
-
-            // List<LineItem> LineItemsOnActiveOrder = activeOrder.LineItems.ToList();
-            
-            //     List<Product> ListOfProductsOnActiveOrder = new List<Product>();
-
-            //     for(var i = 0; i < LineItemsOnActiveOrder.Count(); i++)
-            //     {
-            //         ListOfProductsOnActiveOrder.Add(LineItemsOnActiveOrder[i].Product);
-            //     }
-
-
-            //     model.Products = ListOfProductsOnActiveOrder;
-
-                return View(model);
-            
+                products.Add(context.Product.Where(p => p.ProductId == LineItemsOnActiveOrder[i].ProductId).SingleOrDefault());
             }
+            model.Products = products;
+
             return View(model);
+            
+            
+            
         }
 
         //Method Name: Payment

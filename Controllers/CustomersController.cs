@@ -70,7 +70,7 @@ namespace BangazonWeb.Controllers
 
             if (activeOrder == null)
             {
-                var product = new Product(){Name = "", Description = "You have no items in your cart yet", Price = 0};
+               var product = new Product(){Description="You have no products in your cart!", Name=""};
                 model.Products = new List<Product>();
                 model.Products.Add(product);
                 return View(model);

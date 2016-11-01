@@ -8,20 +8,27 @@ To install this app, you'll need to have dotnet and bower.
 - if you need to install bower, you can do so from this [Bower link](https://bower.io/)
 
 Copy or fork the repository on GitHub and save it on to your local machine. Navigate to the folder the bower.json resides and install the bower dependencies by typing: 
+
 ```bower install```
 
 This app uses a database that it creates. You will need to set an environmental variable that sets the path to this database. Locate the folder your project is saved in and note the path into that folder. 
 
 - OSX/UNIX:
 To set your environmental variable to the local database you'll need to type this into your terminal:
+
 ```export NTABangazonWeb_Db_Path="/yourpath/yourpath/yourpath/bangazonWeb.db```
 
 - Windows OS:
 To set your environmental variable to the local database you'll need to type this into your Powershell terminal:
+
 ```$env:NTABangazonWeb_Db_Path="/yourpath/yourpath/yourpath/bangazonWeb.db```
 
-Once you've set the path you can create the database and set up the dotnet dependencies:
-```dotnet restore
+Once this database path has been set, create the database and set up the dotnet dependencies:
+
+```Bash
+dotnet restore
 dotnet ef database update
-dotnet run```
+dotnet run
+```
+
 

@@ -23,12 +23,11 @@ To set your environmental variable to the local database you'll need to type thi
 
 ```$env:NTABangazonWeb_Db_Path="/yourpath/yourpath/yourpath/bangazonWeb.db```
 
+
 Once this database path has been set, create the database and set up the dotnet dependencies:
 
-```Bash
-dotnet restore
-dotnet ef database update
-dotnet run
-```
+```dotnet restore```
+```dotnet ef database update```
+```dotnet run```
 
 

@@ -12,6 +12,8 @@ namespace BangazonWeb.ViewModels
     {
         public Product Product {get;set;} // This property gives the ViewModel access to the Product.cs model and its properties.
 
+        public string CustomerName {get;set;} //Displayed on detail view to show sellers name.
+
         public SingleProductViewModel(BangazonWebContext ctx) : base(ctx) {} 
     }
 }

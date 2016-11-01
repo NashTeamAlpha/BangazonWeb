@@ -102,7 +102,12 @@ namespace BangazonWeb.Controllers
             
             SingleProductViewModel model = new SingleProductViewModel(context);
 
-            model.Product = await context.Product.SingleOrDefaultAsync(p => p.ProductId == id);
+            Product SingleProduct = await context.Product.SingleOrDefaultAsync(p => p.ProductId == id);
+            
+            Customer SellingCustomer = await context.Customer.Where(c => c.CustomerId == SingleProduct.CustomerId);
+
+            model.Product = SingleProduct;
+            model.CustomerName = $"{SellingCustomer.FirstName} {SellingCustomer.LastName}";
 
             if (model.Product == null)
             {

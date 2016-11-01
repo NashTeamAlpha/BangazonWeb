@@ -25,7 +25,18 @@ $(document).ready(function() {
                 console.log(option);
                 $("#Product_SubProductTypeId").append(`<option value="${option.subProductTypeId}">${option.name}</option>`)
             });
-            // location.reload();
+        });
+    });
+// Adds an item to the users active shopping cart. Then redirects the user to the index file.    
+    $("#AddToCart").on("click", function(e) {
+        $.ajax({
+            url: `/Products/AddToCart/${$(this).val()}`,
+            method: "POST",
+            dataType: "json",
+            contentType: 'application/json; charset=utf-8'
+        }).done((id) => {
+            console.log(id);
+            window.location.replace("http://localhost:5000"); 
         });
     });
 });

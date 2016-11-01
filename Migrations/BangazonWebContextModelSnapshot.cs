@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using BangazonWeb.Data;
 
-namespace BangazonWeb.Migrations
+namespace Bangazonweb.Migrations
 {
     [DbContext(typeof(BangazonWebContext))]
     partial class BangazonWebContextModelSnapshot : ModelSnapshot

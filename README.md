@@ -20,6 +20,7 @@ To set your environmental variable to the local database you'll need to type thi
 
 - Windows OS:
 To set your environmental variable to the local database you'll need to type this into your Powershell terminal:
+
 `$env:NTABangazonWeb_Db_Path="/yourpath/yourpath/yourpath/bangazonWeb.db`
 
 

@@ -141,7 +141,7 @@ namespace BangazonWeb.Controllers
          //Method Name: AddToCart
          //Purpose of the Method: When called, this method should add a product to the current active order. If there isnt a current active order a new one should be made with the active customer.
          //Arguments in Method: The ProductId of the product to add to the active order.
-
+         //Something to note, the methods here must return a json response to the ajax call so the ajax call can redirect the window to index.
          [HttpPost]
          public async Task<IActionResult> AddToCart([FromRoute] int id)
          {

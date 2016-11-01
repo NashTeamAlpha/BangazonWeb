@@ -6,8 +6,15 @@ using BangazonWeb.Models;
 
 namespace BangazonWeb.Data
 {
+    //Class Name: DbInitializer
+    //Author: Grant Regnier and Chris Smalley
+    //Purpose of the class: The purpose of this class is to check if our database is empty, if it is, then this class populates the database with pre-made data.
+    //Methods in Class: Initialize()
     public static class DbInitializer
     {
+        //Method Name: Initialize
+        //Purpose of the Method: This Method checks if the database has any data in it, if it doesn't it populates it with the data specified in the arrays bellow.
+        //Arguments in Method: None.
         public static void Initialize(IServiceProvider serviceProvider)
         {
             using (var context = new BangazonWebContext(serviceProvider.GetRequiredService<DbContextOptions<BangazonWebContext>>()))

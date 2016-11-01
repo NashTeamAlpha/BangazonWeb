@@ -5,6 +5,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BangazonWeb.Models
 {
+    //Class Name: Product
+    //Author: Jamie Duke and Delaine Wendling
+    //Purpose of the class: This class serves as a model for our Product objects being transfered, manipulated, and saved between our Database, context, and Views.
+    //Methods in Class: None.
   public class Product
   {
     [Key]

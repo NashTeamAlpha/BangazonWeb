@@ -1,13 +1,13 @@
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 
 namespace BangazonWeb
 {
+    //Class Name: Program
+    //Author: Grant Regnier
+    //Purpose of the class: The purpose of this class is to Build our application and host in on our server we are building. Using AspNetCore Hosting and kestrel we are assembling our host from our config and other Extensions then running it on line 28.
+    //Methods in Class: Main
     public class Program
     {
         public static void Main(string[] args)

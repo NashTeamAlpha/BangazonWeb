@@ -5,7 +5,7 @@ namespace BangazonWeb.Data
 {
     //Class Name: BangazonWebContext
     //Author: Grant Regnier
-    //Purpose of the class: The purpose of this class is to create a context in memory for our Controllers to interact with our Database
+    //Purpose of the class: The purpose of this class is to create a context in memory for our Controllers to interact with our Database.
     //Methods in Class: No Methods but DBSets of Customer, LineItem, Order, PaymentType, Product, ProductType
     public class BangazonWebContext : DbContext
     {
@@ -23,10 +23,12 @@ namespace BangazonWeb.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+// When an Order is being created we are setting a DateCreated property here of current: Year, Month, Day, Hour, Minute, and Second.
             modelBuilder.Entity<Order>()
                 .Property(b => b.DateCreated)
                 .HasDefaultValueSql("strftime('%Y-%m-%d %H:%M:%S')");
 
+// When a Product is being created we are setting a DateCreated property here of current: Year, Month, Day, Hour, Minute, and Second.
             modelBuilder.Entity<Product>()
                 .Property(b => b.DateCreated)
                 .HasDefaultValueSql("strftime('%Y-%m-%d %H:%M:%S')");

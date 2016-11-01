@@ -9,6 +9,9 @@
 <form asp-controller="Products" asp-action="New" method="post">
   <div class="form-horizontal">
     <hr />
+
+    <input type="hidden" asp-for="Product.CustomerId" value=@Model.ChosenCustomer.CustomerId class="form-control" />
+    
     <div asp-validation-summary="ModelOnly">
       <div class="form-group">
         <label asp-for="Product.Name" class="col-md-2 control-label"> Product Name </label>

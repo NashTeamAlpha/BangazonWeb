@@ -102,7 +102,7 @@ namespace BangazonWeb.Controllers
          public IActionResult Payment()
         {
 
-            BaseViewModel model = new BaseViewModel(context);
+            PaymentTypeViewModel model = new PaymentTypeViewModel(context);
 
             return View(model);
         }
@@ -111,11 +111,11 @@ namespace BangazonWeb.Controllers
         //Purpose of the Method: This is the Overloaded method that actually adds the payments to the Db.
         //Arguments in Method: Takes a new PaymentType object from the form provided and posts it to the database.
         [HttpPost]
-        public async Task<IActionResult> Payment(PaymentType payment)
+        public async Task<IActionResult> Payment([FromForm]PaymentType paymentType)
         {
             if (ModelState.IsValid)
             {
-                context.Add(payment);
+                context.Add(paymentType);
                 await context.SaveChangesAsync();
                 return RedirectToAction("ShoppingCart");
             }

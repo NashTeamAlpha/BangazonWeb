@@ -16,20 +16,17 @@ namespace BangazonWeb.Models
         [Required]
         public int CustomerId {get;set;}
 
-        [Required]
         public Customer Customer {get;set;}
 
         [Required]
-        [CreditCard]
-        public int CardNumber {get;set;}
+        public string CardNumber {get;set;}
 
         [Required]
         [StringLength(25)]
         public string Processor {get;set;}
 
         [Required]
-        [DataType(DataType.Date)]
-        public DateTime ExpirationDate {get;set;}
+        public string ExpirationDate {get;set;}
 
         [Required]
         [StringLength(80)]
@@ -44,7 +41,7 @@ namespace BangazonWeb.Models
         public string State {get;set;}
 
         [Required]
-        [Range(5, 5)]
+        [Range(00001, 99999)]
         public int ZipCode {get;set;}
 
         [Required]

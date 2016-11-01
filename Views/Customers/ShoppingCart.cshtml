@@ -9,7 +9,11 @@
 </div>
 <div class ="row text-right">
   <button asp-action="Payment" class="btn btn-danger btn-lg"><a asp-action="Payment">Add Payment</a></button>
+</div><br>
+<div class ="row text-right">
+  <button asp-action="OrderCompleted" class="btn btn-danger btn-lg"><a asp-action="OrderCompleted">Submit Order</a></button>
 </div>
+  <!--Button with Add to Cart on it-->
 @foreach (var product in Model.Products)
 {
 

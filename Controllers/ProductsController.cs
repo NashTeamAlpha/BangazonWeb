@@ -143,8 +143,7 @@ namespace BangazonWeb.Controllers
          //Arguments in Method: The ProductId of the product to add to the active order.
          //Something to note, the methods here must return a json response to the ajax call so the ajax call can redirect the window to index.
          [HttpPost]
-         [ValidateAntiForgeryToken]
-         public async Task<IActionResult> AddToCart([FromRoute] int? id)
+         public async Task<IActionResult> AddToCart([FromRoute] int id)
          {
              //Get the active customer's order
              var activeOrder = await context.Order.Where(o => o.IsCompleted == false && o.CustomerId==singleton.Customer.CustomerId).SingleOrDefaultAsync(); 
@@ -163,7 +162,7 @@ namespace BangazonWeb.Controllers
                  lineItem.ProductId = Convert.ToInt32(id);
                  context.Add(lineItem);
                  await context.SaveChangesAsync();
-                 return RedirectToAction("Index");
+                 return Json(id);
              }
              else 
              // Add the Product to the existing active order.
@@ -173,7 +172,7 @@ namespace BangazonWeb.Controllers
                  lineItem.ProductId = Convert.ToInt32(id);
                  context.Add(lineItem);
                  await context.SaveChangesAsync();
-                 return RedirectToAction("Index");
+                 return Json(id);
              }
          }
 

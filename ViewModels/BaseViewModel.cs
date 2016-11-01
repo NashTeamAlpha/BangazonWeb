@@ -8,7 +8,7 @@ namespace BangazonWeb.ViewModels
 {
   //Class Name: BaseViewModel
   //Author: Grant Regnier
-  //Purpose of the class: The purpose of this class is to hold the ChosenCustomer property, give the ListOfCustomers list to the _layout.cshtml and manage the route on the customer name partial directly under the customer select dropdown.
+  //Purpose of the class: The purpose of this class is to hold the ChossenCustomer property, give the ListOfCustomers list to the _layout.cshtml and manage the route on the customer name partial directly under the customer select dropdown.
   //Methods in Class: None.
   public class BaseViewModel
   {

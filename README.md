@@ -7,7 +7,7 @@ To install this app, you'll need to have dotnet and bower.
 - If you need to install dotnet, you can do so from this [Microsoft link](https://www.microsoft.com/en-us/download/details.aspx?id=30653)
 - if you need to install bower, you can do so from this [Bower link](https://bower.io/)
 
-Copy or fork the repository on GitHub and save it on to your local machine. Navigate to the folder the bower.json resides and install the bower dependencies by typing: 
+Copy or fork the repository on GitHub and save it on to your local machine. Install the bower dependencies by typing: 
 
 ```bower install```
 
@@ -24,10 +24,12 @@ To set your environmental variable to the local database you'll need to type thi
 `$env:NTABangazonWeb_Db_Path="/yourpath/yourpath/yourpath/bangazonWeb.db`
 
 
-After this database path has been set, create the database and set up the dotnet dependencies:
+After this database path has been set, create the database and set up the dotnet dependencies by running the following commands:
 
 ```
 dotnet restore
 dotnet ef database update
 dotnet run
 ```
+
+Once the above installation requirements are met, the site should be available on your local host. 

@@ -162,7 +162,7 @@ namespace BangazonWeb.Controllers
                  lineItem.ProductId = Convert.ToInt32(id);
                  context.Add(lineItem);
                  await context.SaveChangesAsync();
-                 return RedirectToAction("Index");
+                 return Json(id);
              }
              else 
              // Add the Product to the existing active order.
@@ -172,7 +172,7 @@ namespace BangazonWeb.Controllers
                  lineItem.ProductId = Convert.ToInt32(id);
                  context.Add(lineItem);
                  await context.SaveChangesAsync();
-                 return RedirectToAction("Index");
+                 return Json(id);
              }
          }
 

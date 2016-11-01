@@ -88,9 +88,6 @@ namespace BangazonWeb.Controllers
                 CartTotal += context.Product.Where(p => p.ProductId == LineItemsOnActiveOrder[i].ProductId).SingleOrDefault().Price;
             }
 
-            List<Product> products = new List<Product>();
-
-
             model.CartTotal = CartTotal;
             model.Products = ListOfProducts;
 

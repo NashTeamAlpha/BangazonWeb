@@ -56,10 +56,10 @@ namespace BangazonWeb.Migrations
                 {
                     PaymentTypeId = table.Column<int>(nullable: false)
                         .Annotation("Autoincrement", true),
-                    CardNumber = table.Column<int>(nullable: false),
+                    CardNumber = table.Column<string>(nullable: false),
                     City = table.Column<string>(maxLength: 50, nullable: false),
                     CustomerId = table.Column<int>(nullable: false),
-                    ExpirationDate = table.Column<DateTime>(nullable: false),
+                    ExpirationDate = table.Column<string>(nullable: false),
                     FirstName = table.Column<string>(maxLength: 50, nullable: false),
                     LastName = table.Column<string>(maxLength: 50, nullable: false),
                     Processor = table.Column<string>(maxLength: 25, nullable: false),
@@ -84,6 +84,7 @@ namespace BangazonWeb.Migrations
                 {
                     ProductId = table.Column<int>(nullable: false)
                         .Annotation("Autoincrement", true),
+                    CustomerId = table.Column<int>(nullable: false),
                     DateCreated = table.Column<DateTime>(nullable: false, defaultValueSql: "strftime('%Y-%m-%d %H:%M:%S')"),
                     Description = table.Column<string>(maxLength: 255, nullable: false),
                     Name = table.Column<string>(maxLength: 100, nullable: false),
@@ -93,6 +94,12 @@ namespace BangazonWeb.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Product", x => x.ProductId);
+                    table.ForeignKey(
+                        name: "FK_Product_Customer_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "Customer",
+                        principalColumn: "CustomerId",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Product_SubProductType_SubProductTypeId",
                         column: x => x.SubProductTypeId,
@@ -179,6 +186,11 @@ namespace BangazonWeb.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_PaymentType_CustomerId",
                 table: "PaymentType",
+                column: "CustomerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Product_CustomerId",
+                table: "Product",
                 column: "CustomerId");
 
             migrationBuilder.CreateIndex(

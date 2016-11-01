@@ -30,5 +30,8 @@ namespace BangazonWeb.Models
     public int SubProductTypeId { get; set; }
     public SubProductType SubProductType { get; set; }
     public ICollection<LineItem> LineItems; 
+    [Required]
+    public int CustomerId {get;set;}
+    public Customer Customer {get;set;}
   }
 }

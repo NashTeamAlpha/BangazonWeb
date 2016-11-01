@@ -170,19 +170,22 @@ namespace BangazonWeb.Data
                       Description = "Pampelmouse La Croix which taste real good",
                       SubProductTypeId = subProductTypes.Single(s => s.Name == "Food").SubProductTypeId,
                       Name = "Pampelmouse La Croix",
-                      Price = 3.55
+                      Price = 3.55,
+                      CustomerId = 1
                   },
                   new Product { 
                       Description = "A 2012 iPod Shuffle. Headphones are included. 16G capacity.",
                       SubProductTypeId = subProductTypes.Single(s => s.Name == "Portable Audio and Accessories").SubProductTypeId,
                       Name = "iPod Shuffle",
-                      Price = 18.00
+                      Price = 18.00,
+                      CustomerId = 1
                   },
                   new Product { 
                       Description = "Stainless steel refrigerator. Three years old. Minor scratches.",
                       SubProductTypeId = subProductTypes.Single(s => s.Name == "Refrigerators and Freezers").SubProductTypeId,
                       Name = "Samsung refrigerator",
-                      Price = 500.00
+                      Price = 500.00,
+                      CustomerId = 1
                   }
               };
 

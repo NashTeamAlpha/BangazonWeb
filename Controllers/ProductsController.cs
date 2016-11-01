@@ -141,9 +141,9 @@ namespace BangazonWeb.Controllers
          //Method Name: AddToCart
          //Purpose of the Method: When called, this method should add a product to the current active order. If there isnt a current active order a new one should be made with the active customer.
          //Arguments in Method: The ProductId of the product to add to the active order.
+
          [HttpPost]
-         [ValidateAntiForgeryToken]
-         public async Task<IActionResult> AddToCart([FromRoute] int? id)
+         public async Task<IActionResult> AddToCart([FromRoute] int id)
          {
              //Get the active customer's order
              var activeOrder = await context.Order.Where(o => o.IsCompleted == false && o.CustomerId==singleton.Customer.CustomerId).SingleOrDefaultAsync(); 

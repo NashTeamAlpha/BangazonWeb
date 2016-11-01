@@ -24,7 +24,15 @@ $(document).ready(function() {
                 console.log(option);
                 $("#Product_SubProductTypeId").append(`<option value="${option.subProductTypeId}">${option.name}</option>`)
             });
-            // location.reload();
+        });
+    });
+    $("#AddToCart").on("click", function(e) {
+        $.ajax({
+            url: `/Products/AddToCart/${$(this).val()}`,
+            method: "POST",
+            dataType: "json",
+            contentType: 'application/json; charset=utf-8'
+        }).done((response) => {
         });
     });
 });

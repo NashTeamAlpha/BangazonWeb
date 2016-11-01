@@ -9,6 +9,10 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace BangazonWeb
 {
+    //Class Name: Startup
+    //Author: Grant Regnier
+    //Purpose of the class: The purpose of this class is to Configue our Application in many different ways(CORS, env paths, DBcontext, etc...), use our static files in wwwroot, and initialize our database.
+    //Methods in Class: Startup(), ConfigureServices(), Configure(). 
     public class Startup
     {
         public Startup(IHostingEnvironment env)

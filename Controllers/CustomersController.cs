@@ -76,17 +76,17 @@ namespace BangazonWeb.Controllers
             if (activeOrder != null)
             {
 
-            // List<LineItem> LineItemsOnActiveOrder = activeOrder.LineItems.ToList();
-            
-            //     List<Product> ListOfProductsOnActiveOrder = new List<Product>();
+                List<LineItem> LineItemsOnActiveOrder = activeOrder.LineItems.ToList();
+                
+                List<Product> ListOfProductsOnActiveOrder = new List<Product>();
 
-            //     for(var i = 0; i < LineItemsOnActiveOrder.Count(); i++)
-            //     {
-            //         ListOfProductsOnActiveOrder.Add(LineItemsOnActiveOrder[i].Product);
-            //     }
+                for(var i = 0; i < LineItemsOnActiveOrder.Count(); i++)
+                {
+                    ListOfProductsOnActiveOrder.Add(LineItemsOnActiveOrder[i].Product);
+                }
 
 
-            //     model.Products = ListOfProductsOnActiveOrder;
+                model.Products = ListOfProductsOnActiveOrder;
 
                 return View(model);
             

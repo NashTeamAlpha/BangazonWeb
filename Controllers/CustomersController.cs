@@ -77,19 +77,17 @@ namespace BangazonWeb.Controllers
             }
             
 
-            List<LineItem> LineItemsOnActiveOrder = activeOrder.LineItems.ToList();
+            List<LineItem> LineItemsOnActiveOrder = context.LineItem.Where(li => li.OrderId == activeOrder.OrderId).ToList();
             
-                List<Product> ListOfProductsOnActiveOrder = new List<Product>();
+               
+            List<Product> products = new List<Product>();
+            for(var i = 0; i < LineItemsOnActiveOrder.Count(); i++)
+            {
+                products.Add(context.Product.Where(p => p.ProductId == LineItemsOnActiveOrder[i].ProductId).SingleOrDefault());
+            }
+            model.Products = products;
 
-                for(var i = 0; i < LineItemsOnActiveOrder.Count(); i++)
-                {
-                    ListOfProductsOnActiveOrder.Add(LineItemsOnActiveOrder[i].Product);
-                }
-
-
-                model.Products = ListOfProductsOnActiveOrder;
-
-                return View(model);
+            return View(model);
             
             
             

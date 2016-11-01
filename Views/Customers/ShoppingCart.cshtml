@@ -7,12 +7,15 @@
 <div class="row text-right">
    @Html.DropDownList("ListOfPaymentTypes")
 </div>
+<div class ="row text-right">
+  <button asp-action="Payment" class="btn btn-danger btn-lg"><a asp-action="Payment">Add Payment</a></button>
+</div>
 @foreach (var product in Model.Products)
 {
 
   <div class="row text-left">
     <div class="col-md-4">
-      <a asp-action="Single" asp-route-id="@product.ProductId">
+      <a asp-action="Single" asp-route-id="@product.ProductId" asp-controller="Products">
         @Html.DisplayFor(modelItem => product.Name)
       </a>
     </div>

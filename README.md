@@ -20,14 +20,13 @@ To set your environmental variable to the local database you'll need to type thi
 
 - Windows OS:
 To set your environmental variable to the local database you'll need to type this into your Powershell terminal:
-
-```$env:NTABangazonWeb_Db_Path="/yourpath/yourpath/yourpath/bangazonWeb.db```
-
-
-Once this database path has been set, create the database and set up the dotnet dependencies:
-
-```dotnet restore```
-```dotnet ef database update```
-```dotnet run```
+`$env:NTABangazonWeb_Db_Path="/yourpath/yourpath/yourpath/bangazonWeb.db`
 
 
+After this database path has been set, create the database and set up the dotnet dependencies:
+
+```
+dotnet restore
+dotnet ef database update
+dotnet run
+```

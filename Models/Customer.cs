@@ -4,6 +4,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BangazonWeb.Models
 {
+    //Class Name: Customer
+    //Author: Chris Smalley And Debbie Bourne
+    //Purpose of the class: This class serves as a model for our Customer objects being transfered, manipulated, and saved between our Database, context, and Views.
+    //Methods in Class: None.
     public class Customer
     {
         [Key]

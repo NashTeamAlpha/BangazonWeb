@@ -4,6 +4,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BangazonWeb.Models
 {
+    //Class Name: PaymentType
+    //Author: Zack Repass and Grant Regnier
+    //Purpose of the class: This class serves as a model for our PaymentType objects being transfered, manipulated, and saved between our Database, context, and Views.
+    //Methods in Class: None.
     public class PaymentType
     {
         [Key]

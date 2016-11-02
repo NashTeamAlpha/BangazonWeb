@@ -32,8 +32,8 @@
             <div class="navbar-collapse collapse">
                 
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Products" asp-action="New">New Product</a></li>
                     <li><a asp-area="" asp-controller="Products" asp-action="Types">Product Types</a></li>
+                    <li id="SellAProduct" class=@Model.Hidden><a asp-area="" asp-controller="Products" asp-action="New">Sell a Product</a></li>
                 </ul>
 
                  <ul class="nav navbar-nav navbar-right">

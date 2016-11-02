@@ -28,6 +28,19 @@ namespace BangazonWeb.ViewModels
         return "ShoppingCart";
       }
     }
+    public string Hidden {
+      get {
+        Customer customer = singleton.Customer;
+        // If no customer has been chosen yet, it's value will be null
+        if (customer == null)
+        {
+          // Return New route
+        return "hidden";
+        }
+        //Return Shopping Cart Route
+        return "";
+      }
+    }
     public string ShoppingCartItems {
       get {
         Customer customer = singleton.Customer;

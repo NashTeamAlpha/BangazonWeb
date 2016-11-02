@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using BangazonWeb.Data;
 
-namespace BangazonWeb.Migrations
+namespace Bangazonweb.Migrations
 {
     [DbContext(typeof(BangazonWebContext))]
-    [Migration("20161101152005_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20161101204114_initialCreate")]
+    partial class initialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -84,7 +84,8 @@ namespace BangazonWeb.Migrations
                     b.Property<int>("PaymentTypeId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("CardNumber");
+                    b.Property<string>("CardNumber")
+                        .IsRequired();
 
                     b.Property<string>("City")
                         .IsRequired()
@@ -92,7 +93,8 @@ namespace BangazonWeb.Migrations
 
                     b.Property<int>("CustomerId");
 
-                    b.Property<DateTime>("ExpirationDate");
+                    b.Property<string>("ExpirationDate")
+                        .IsRequired();
 
                     b.Property<string>("FirstName")
                         .IsRequired()
@@ -128,6 +130,8 @@ namespace BangazonWeb.Migrations
                     b.Property<int>("ProductId")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int>("CustomerId");
+
                     b.Property<DateTime>("DateCreated")
                         .ValueGeneratedOnAddOrUpdate()
                         .HasDefaultValueSql("strftime('%Y-%m-%d %H:%M:%S')");
@@ -145,6 +149,8 @@ namespace BangazonWeb.Migrations
                     b.Property<int>("SubProductTypeId");
 
                     b.HasKey("ProductId");
+
+                    b.HasIndex("CustomerId");
 
                     b.HasIndex("SubProductTypeId");
 
@@ -219,6 +225,11 @@ namespace BangazonWeb.Migrations
 
             modelBuilder.Entity("BangazonWeb.Models.Product", b =>
                 {
+                    b.HasOne("BangazonWeb.Models.Customer", "Customer")
+                        .WithMany()
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("BangazonWeb.Models.SubProductType", "SubProductType")
                         .WithMany()
                         .HasForeignKey("SubProductTypeId")

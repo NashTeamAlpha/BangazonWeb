@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using BangazonWeb.Data;
 using BangazonWeb.Models;
@@ -102,7 +103,12 @@ namespace BangazonWeb.Controllers
             
             SingleProductViewModel model = new SingleProductViewModel(context);
 
-            model.Product = await context.Product.SingleOrDefaultAsync(p => p.ProductId == id);
+            var SingleProduct = await context.Product.SingleOrDefaultAsync(p => p.ProductId == id);
+            
+            var SellingCustomer = context.Customer.Where(c => c.CustomerId == SingleProduct.CustomerId).Single();
+
+            model.Product = SingleProduct;
+            model.CustomerName = $"{SellingCustomer.FirstName} {SellingCustomer.LastName}";
 
             if (model.Product == null)
             {

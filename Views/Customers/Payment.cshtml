@@ -6,9 +6,14 @@
 
 <h1>Add a New Payment Type</h1>
 
-<form asp-action="Payment">
+<form asp-action="Payment" method="Post" asp-controller="Customers">
     <div class="form-horizontal">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>    
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="hidden" asp-for="PaymentType.CustomerId" value=@Model.ChosenCustomer.CustomerId class="form-control" />
+            </div>
+        </div>
         <div class="form-group">
             <label asp-for="PaymentType.FirstName" class="col-md-2 control-label">First Name</label>
             <div class="col-md-10">
@@ -16,6 +21,7 @@
                 <span asp-validation-for="PaymentType.FirstName" class="text-danger" />
             </div>
         </div>
+        
         <div class="form-group">
             <label asp-for="PaymentType.LastName" class="col-md-2 control-label">Last Name</label>
             <div class="col-md-10">
@@ -45,10 +51,10 @@
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="PaymentType.ZIP" class="col-md-2 control-label">ZIP</label>
+            <label asp-for="PaymentType.ZipCode" class="col-md-2 control-label">Zip Code</label>
             <div class="col-md-10">
-                <input asp-for="PaymentType.ZIP" class="form-control" />
-                <span asp-validation-for="PaymentType.ZIP" class="text-danger" />
+                <input asp-for="PaymentType.ZipCode" class="form-control" />
+                <span asp-validation-for="PaymentType.ZipCode" class="text-danger" />
             </div>
         </div>
         <div class="form-group">
@@ -74,7 +80,7 @@
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" asp-action="Payment" value="Create Payment Type" class="btn btn-default" />
+                <input type="submit" value="Create Payment Type" class="btn btn-default" />
             </div>
         </div>
 

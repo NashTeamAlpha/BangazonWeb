@@ -50,5 +50,5 @@ $(document).ready(function() {
             console.log(id);
             window.location.replace("http://localhost:5000/Customers/OrderCompleted"); 
         });
-    })
+    });
 });

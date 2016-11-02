@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Bangazonweb.Migrations
+namespace BangazonWeb.Migrations
 {
     public partial class initialCreate : Migration
     {

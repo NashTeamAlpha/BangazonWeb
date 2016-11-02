@@ -39,4 +39,16 @@ $(document).ready(function() {
             window.location.replace("http://localhost:5000"); 
         });
     });
+//Submits order then routes to order completed page
+    $("#submitOrder").on("click", function(e){
+        $.ajax({
+            url: `/Customers/SubmitOrder/${$("#ListOfPaymentTypes").val()}`,
+            method: "PATCH",
+            dataType: "json",
+            contentType: 'application/json; charset=utf-8'
+        }).done((id) => {
+            console.log(id);
+            window.location.replace("http://localhost:5000/Customers/OrderCompleted"); 
+        });
+    })
 });

@@ -156,6 +156,11 @@ namespace BangazonWeb.Data
                       Description = "If you can wear it and its made of cloth, you will find here. Yeah we know technically you can wear almost anything but please keep it with stuff you might actually find at a clothing store. ",
                       ProductTypeId = productTypes.Single(s => s.Name == "Everything Else").ProductTypeId
                   },
+                  new SubProductType { 
+                      Name = "Misc",
+                      Description = "If you can wear it and its made of cloth, you will find here. Yeah we know technically you can wear almost anything but please keep it with stuff you might actually find at a clothing store. ",
+                      ProductTypeId = productTypes.Single(s => s.Name == "Everything Else").ProductTypeId
+                  },
               };
 
               foreach (SubProductType i in subProductTypes)

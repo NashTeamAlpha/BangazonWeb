@@ -5,10 +5,10 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using BangazonWeb.Data;
 
-namespace Bangazonweb.Migrations
+namespace BangazonWeb.Migrations
 {
     [DbContext(typeof(BangazonWebContext))]
-    [Migration("20161101204114_initialCreate")]
+    [Migration("20161102144422_initialCreate")]
     partial class initialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -59,8 +59,7 @@ namespace Bangazonweb.Migrations
 
                     b.Property<int>("CustomerId");
 
-                    b.Property<DateTime?>("DateCompleted")
-                        .ValueGeneratedOnAddOrUpdate();
+                    b.Property<DateTime?>("DateCompleted");
 
                     b.Property<DateTime>("DateCreated")
                         .ValueGeneratedOnAddOrUpdate()

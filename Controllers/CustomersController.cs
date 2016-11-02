@@ -125,20 +125,30 @@ namespace BangazonWeb.Controllers
         //Method Name: OrderCompleted
         //Purpose of the Method: To change the isCompleted bool from false to true on the active order for this customer and direct the user to the OrderCompleted view.
         //Arguments in Method: None.
-        [HttpPut]
-        public async Task<IActionResult> OrderCompleted()
+        [HttpGet]
+        public IActionResult OrderCompleted()
         {
-            var activeOrder = await context.Order.Where(o => o.IsCompleted == false && o.CustomerId==singleton.Customer.CustomerId)
-            .SingleOrDefaultAsync(); 
-            activeOrder.IsCompleted = true;
-            context.Update(activeOrder);
-            await context.SaveChangesAsync();
 
             BaseViewModel model = new BaseViewModel(context);
 
             return View(model);
         }
+        //Method Name: SubmitOrder
+        //Purpose of the Method: To change the isCompleted bool from false to true on the active order for this customer and direct the user to the OrderCompleted view.
+        //Arguments in Method: None.
+        [HttpPatch]
+        public async Task<IActionResult> SubmitOrder([FromRoute]int id)
+        {
+            var activeOrder = await context.Order.Where(o => o.IsCompleted == false && o.CustomerId==singleton.Customer.CustomerId)
+            .SingleOrDefaultAsync();
+            activeOrder.PaymentType = context.PaymentType.Where(pt => pt.PaymentTypeId == id).SingleOrDefault();
+            activeOrder.DateCompleted = DateTime.Today;
+            activeOrder.IsCompleted = true;
+            context.Update(activeOrder);
+            await context.SaveChangesAsync();
 
+            return Json(id);
+        }
         //Method Name: Activate
         //Purpose of the Method: To change the current ActiveCustomer singleton to whatever is selected in the top right dropdown select option.
         //Arguments in Method: Takes a CustomerId from the drop down select option in the navigation bar on change of selected option. 

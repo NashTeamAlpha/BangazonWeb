@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using BangazonWeb.Data;
 
-namespace Bangazonweb.Migrations
+namespace BangazonWeb.Migrations
 {
     [DbContext(typeof(BangazonWebContext))]
     partial class BangazonWebContextModelSnapshot : ModelSnapshot
@@ -58,8 +58,7 @@ namespace Bangazonweb.Migrations
 
                     b.Property<int>("CustomerId");
 
-                    b.Property<DateTime?>("DateCompleted")
-                        .ValueGeneratedOnAddOrUpdate();
+                    b.Property<DateTime?>("DateCompleted");
 
                     b.Property<DateTime>("DateCreated")
                         .ValueGeneratedOnAddOrUpdate()
